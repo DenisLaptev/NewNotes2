@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#3F51B5</color>
+    <color name="colorAccent">#F44336</color>
+    <color name="mainBackground">#e2e2e2</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_black">#191919</color>
+
+
+    <color name="colorBackgroundMain">#E8EAF6</color>
+    <color name="colorBackgroundWhite">#ffffff</color>
+    <color name="colorBackgroundDisplayDescription">#e3cfc7</color>
+
+    <color name="colorTextRed">#f01305</color>
+    <color name="colorTextDark">#06108e</color>
+    <color name="colorTextDescriptionGreen">#095b0b</color>
+    <color name="colorTextMainMenuDarkBlue">#050737</color>
+
+    <color name="color_btn_calendar_white">#ffffff</color>
+
+    <!--item color markers-->
+    <color name="color_marker_event">#f40a0a</color>
+
+    <color name="color_marker_todo">#de2a2a</color>
+    <color name="color_marker_ideas">#10b840</color>
+    <color name="color_marker_birthdays">#107db8</color>
+    <color name="color_marker_different">#f0a51b</color>
+    <!--item color markers-->
+
+
+    <!--Colors in item activities-->
+    <color name="color_item_activity_description">#191919</color>
+    <color name="color_item_activity_date">#f01305</color>
+    <!--Colors in item activities-->
+
+    <color name="black_semi_transparent">#B2000000</color>
+
+</resources>

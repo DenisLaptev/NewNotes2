@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">NewNotes</string>
+    <string name="toolbar_title">My Business Plan</string>
+
+    <string name="tab_item_different">Different</string>
+    <string name="tab_item_ideas">Ideas</string>
+    <string name="tab_item_todo">TODO</string>
+    <string name="tab_item_birthdays">Birthdays</string>
+
+    <string name="view_navigation_open">Open</string>
+    <string name="view_navigation_close">Close</string>
+
+    <string name="menu_notes_item_todo">TODO</string>
+    <string name="menu_notes_item_ideas">Ideas</string>
+    <string name="menu_notes_item_birthdays">Birthdays</string>
+    <string name="menu_notes_item_different">Different</string>
+    <string name="menu_notes_item_mainmenu">Main menu</string>
+
+    <string name="menu_events_item_today">Today</string>
+    <string name="menu_events_item_thismonth">This month</string>
+    <string name="menu_events_item_all_events">All events</string>
+    <string name="menu_events_item_mainmenu">Main menu</string>
+
+    <string name="menu_events_item">Events</string>
+
+    <!--<string-array name="Months">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>-->
+
+
+
+
+    <string name="admob_app_id">ca-app-pub-7986696519803132~8675083605</string>
+
+    <string name="banner_home_footer">ca-app-pub-7986696519803132/1151816806</string>
+
+    <string name="interstitial_full_screen">ca-app-pub-7986696519803132/2628550005</string>
+
+
+    <string name="billing_pubkey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkm2CrMoOeLISKGMYbslJBdSuWd5v9fYA2jF0bFOCG2RgLuEHMSBHNsOowk6vHF1v+j0LqF4C7BpuxgvvHaQIpt2Ofwk1JP15lAJabTPcbSufzqGGxwKB9VrWwSPEZv9gOKPfN9oBrMLeh6PALRRsWnXELCY1OysAYZUofVWPze2GzvGoJ86EXbE/QvcrR8YGK9R3EvjqYezHVQbVD0w3DVgNoltgH2c4eKOoHX7pVs9xQChYpc+v7a08fjVYgVl9sknGZyU2r97jKZqu9ykuNVAAcCFhJadg7db5W8CPFMNxETc71dC+dCG6gwsSTjEIM42AXq7irru+OGT5ziuwiwIDAQAB</string>
+
+</resources>

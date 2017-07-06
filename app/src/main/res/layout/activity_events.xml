@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout_events"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Строка Toolbar-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_events"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+            <!--android:theme="@style/AppDefault"-->
+
+            <!--Строка TabLayout с табами.-->
+            <!--
+            TabLayout хранит табы, он не хранит контент.
+            Для коньента используется ViewPager.
+            -->
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tablayout_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorHeight="6dp"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextColor="@android:color/white" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <!--Во ViewPager-е хранится контент.-->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <!--Плюсик в кружке-->
+
+        <FrameLayout
+            android:id="@+id/frame_layout_events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+            <!--  floating action menu with buttons -->
+
+
+            <com.getbase.floatingactionbutton.FloatingActionsMenu
+                android:id="@+id/multiple_actions_events"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                fab:fab_addButtonColorNormal="@color/colorPrimary"
+                fab:fab_addButtonColorPressed="@color/colorPrimaryDark"
+                fab:fab_addButtonPlusIconColor="@color/color_white"
+                fab:fab_labelStyle="@style/menu_labels_style">
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/action_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/color_marker_event"
+                    fab:fab_colorPressed="@color/colorPrimaryDark"
+                    fab:fab_icon="@drawable/ic_pillar_white"
+                    fab:fab_size="normal"
+                    fab:fab_title="EVENT" />
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/action_events_mainmenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/colorPrimaryDark"
+                    fab:fab_colorPressed="@color/colorPrimaryDark"
+                    fab:fab_icon="@drawable/ic_message_text_white"
+                    fab:fab_title="MAIN MENU" />
+
+            </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+        </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <!--Выезжающее меню слева-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view_events"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header_events"
+        app:menu="@menu/menu_navigation_events" />
+
+
+</android.support.v4.widget.DrawerLayout>

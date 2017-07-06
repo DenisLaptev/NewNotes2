@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_event"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground"
+    android:orientation="vertical"
+    tools:context="ua.a5.newnotes.activities.events_activities.EventActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--Строка Toolbar-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_event"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/color_marker_event"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_marker_event"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorHeight="6dp"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@android:color/white" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="5dp">
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_idea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp">
+
+
+
+                <TextView
+                    android:id="@+id/tv_event_activity_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="164dp"
+                    android:gravity="center"
+                    android:hint="Event Description"
+                    android:textColor="@color/color_item_activity_description"
+                    android:textSize="@dimen/item_activity_description_size" />
+
+                <TextView
+                    android:id="@+id/tv_event_activity_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Date"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -22,7 +22,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                >
+
+            </android.support.v7.widget.Toolbar>
             <!--android:theme="@style/AppDefault"-->
 
             <!--Строка TabLayout с табами.-->
@@ -80,13 +83,13 @@
                     fab:fab_title="EVENT" />
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/action_events_mainmenu"
+                    android:id="@+id/action_events_quit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     fab:fab_colorNormal="@color/colorPrimaryDark"
                     fab:fab_colorPressed="@color/colorPrimaryDark"
-                    fab:fab_icon="@drawable/ic_message_text_white"
-                    fab:fab_title="MAIN MENU" />
+                    fab:fab_icon="@drawable/ic_run"
+                    fab:fab_title="Quit" />
 
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
@@ -100,8 +103,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:itemTextAppearance="@style/NavigationViewStyle"
         app:headerLayout="@layout/navigation_header_events"
-        app:menu="@menu/menu_navigation_events" />
-
+        app:itemIconTint="@color/colorTextDark"
+        app:menu="@menu/main_menu_events"
+        />
+    <!---->
+<!---->
 
 </android.support.v4.widget.DrawerLayout>

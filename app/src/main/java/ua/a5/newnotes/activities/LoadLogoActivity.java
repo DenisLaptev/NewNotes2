@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import ua.a5.newnotes.R;
 
+import static ua.a5.newnotes.utils.Constants.flagIsShowMenuWhenAppIsOpenedFirstTime;
+
 public class LoadLogoActivity extends AppCompatActivity {
     //таймер отсчитывает, сколько времени на заставке будет показываться логотип компании.
     LoadLogoTimer loadLogoTimer;
@@ -16,6 +18,10 @@ public class LoadLogoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_load_logo);
+
+//При первом запуске делаем шторку открытой, чтоб пользоваетль знал, что она есть.
+        flagIsShowMenuWhenAppIsOpenedFirstTime = true;
+//При первом запуске делаем шторку открытой, чтоб пользоваетль знал, что она есть.
 
         loadLogoTimer = new LoadLogoTimer(2000, 1000);
         loadLogoTimer.start();
@@ -35,7 +41,7 @@ public class LoadLogoActivity extends AppCompatActivity {
         @Override
         public void onFinish() {
             //по окончании таймера заускаем активити LoadGameActivity.
-            Intent intent = new Intent(LoadLogoActivity.this, StartMenuActivity.class);
+            Intent intent = new Intent(LoadLogoActivity.this, NotesActivity.class);
             startActivity(intent);
             finish();
         }

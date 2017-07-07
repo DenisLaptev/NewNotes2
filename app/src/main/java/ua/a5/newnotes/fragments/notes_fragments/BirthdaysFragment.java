@@ -35,10 +35,9 @@ import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
  */
 
 public class BirthdaysFragment extends AbstractTabFragment implements BirthdaysListAdapter.BirthdayClickListener {
+    private static final int LAYOUT = R.layout.fragment_birthdays;
 
     FloatingActionsMenu menuMultipleActions;
-
-    private static final int LAYOUT = R.layout.fragment_birthdays;
 
     //для работы с БД.
     DBHelper dbHelper;

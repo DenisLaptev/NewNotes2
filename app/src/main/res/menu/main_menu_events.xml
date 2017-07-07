@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_menu_events_notes"
+        android:icon="@drawable/ic_check_circle_outline_black"
+        android:orderInCategory="1"
+        android:title="Notes" />
+
+    <item
+        android:id="@+id/main_menu_events_events"
+        android:icon="@drawable/ic_pillar_black"
+        android:orderInCategory="1"
+        android:title="Events" />
+
+    <item
+        android:id="@+id/main_menu_events_upgrade"
+        android:icon="@drawable/ic_arrow_up"
+        android:orderInCategory="1"
+        android:title="Upgrade" />
+
+    <item
+        android:id="@+id/main_menu_events_moreapps"
+        android:icon="@drawable/ic_google_play"
+        android:orderInCategory="1"
+        android:title="More Apps" />
+
+    <item
+        android:id="@+id/main_menu_events_quit"
+        android:icon="@drawable/ic_run_black"
+        android:orderInCategory="1"
+        android:title="Quit" />
+</menu>

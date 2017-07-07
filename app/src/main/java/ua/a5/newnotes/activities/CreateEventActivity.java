@@ -30,7 +30,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -78,6 +77,9 @@ import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getDifferen
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsWords.getIntMonthFromString;
 
 public class CreateEventActivity extends AppCompatActivity {
+    public static SpannableString bufferSpannableString = null;
+
+    static final int DATE_DIALOG_ID = 2;
 
     boolean isSavedFlagEvent;
 
@@ -85,25 +87,24 @@ public class CreateEventActivity extends AppCompatActivity {
     private int mMonth;
     private int mDay;
 
-    //private Button btnEventsDeadline;
-    static final int DATE_DIALOG_ID = 2;
-
-    public static SpannableString bufferSpannableString = null;
-
     String initialWord;
     String strRegExp;
 
     EditText etCreateEventTitle;
     EditText etEventDescription;
-    private TextView tvEventsDeadline;
+    TextView tvEventsDeadline;
     ImageView ivEventCalendar;
 
     //для работы с БД.
     DBHelper dbHeper;
 
     EventDTO event;
+    EventDTO eventDTO;
+
+
     String title;
     String location;
+    String description;
 
     int beginDay = getCurrentDay();
     int beginMonth = getCurrentMonth();
@@ -119,12 +120,6 @@ public class CreateEventActivity extends AppCompatActivity {
     String endHour = String.valueOf(getCurrentHour());
     String endMinute = String.valueOf(getCurrentMinute());
 
-    String description;
-
-
-    EventDTO eventDTO;
-
-
     //для баннера////////////////////////////////////////////////////
     protected AdView mAdView;
     //для баннера////////////////////////////////////////////////////
@@ -133,19 +128,17 @@ public class CreateEventActivity extends AppCompatActivity {
     InterstitialAd mInterstitialAd;
     //для Interstitial////////////////////////////////////////////////////
 
-
     private Toolbar toolbarEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
-        //setContentView(R.layout.activity_layout_test);
-
 
         toolbarEvent = (Toolbar) findViewById(R.id.toolbar_event);
         toolbarEvent.setTitle("EVENT");
         setSupportActionBar(toolbarEvent);
+
 
 
         if (mIsPremium == false) {
@@ -259,8 +252,6 @@ public class CreateEventActivity extends AppCompatActivity {
                     getCurrentYear()
             );
         }
-
-
     }
 
 
@@ -310,7 +301,6 @@ public class CreateEventActivity extends AppCompatActivity {
                             calDateEnd.getTimeInMillis() + Integer.parseInt(endHour) * 60 * 60 * 1000 + Integer.parseInt(endMinute) * 60 * 1000);
 
                     startActivity(calIntent);
-                    //finish();
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -324,14 +314,10 @@ public class CreateEventActivity extends AppCompatActivity {
                             calDateEnd.getTimeInMillis() + Integer.parseInt(endHour) * 60 * 60 * 1000 + Integer.parseInt(endMinute) * 60 * 1000);
 
                     startActivity(calIntent);
-                    //finish();
-
                 }
                 break;
 
             case R.id.menu_event_save:
-                Toast.makeText(this, "save", Toast.LENGTH_SHORT).show();
-
 
                 if (isCardForUpdate == true) {
                     deleteItemFromTable(eventDTO);
@@ -393,7 +379,6 @@ public class CreateEventActivity extends AppCompatActivity {
                 //сейчас он нам не нужен, поэтому он = null.
                 sqLiteDatabase.insert(TABLE_EVENTS_NAME, null, contentValues);
 
-
                 Log.d(LOG_TAG, "Date inserted");
 
                 System.out.println(contentValues);
@@ -403,14 +388,9 @@ public class CreateEventActivity extends AppCompatActivity {
 ////////////////////////
 
                 isSavedFlagEvent = true;
-
-                Toast.makeText(this, event.toString(), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.menu_event_delete:
-                Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateEventActivity.this, R.style.MyAlertDialogStyle);
                 builder.setTitle("Delete?");
                 builder.setMessage("Do You Really Want To Delete?");
@@ -436,10 +416,8 @@ public class CreateEventActivity extends AppCompatActivity {
                 builder.show();
                 break;
         }
-
         isCardForUpdate = false;
         return true;
-
     }
 
 
@@ -723,7 +701,6 @@ public class CreateEventActivity extends AppCompatActivity {
                         Intent calIntent = new Intent(Intent.ACTION_INSERT);
                         calIntent.setType("vnd.android.cursor.item/event");
 
-
                         int beginDay = getCurrentDay();
                         int beginMonth = getCurrentMonth();
                         int beginYear = getCurrentYear();
@@ -760,7 +737,6 @@ public class CreateEventActivity extends AppCompatActivity {
                 }, indexesOfFirstLetter, indexesOfFirstLetter + initialWord.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
-
         return newSpannableString;
     }
 
@@ -831,7 +807,6 @@ public class CreateEventActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-
         if (!isSavedFlagEvent) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateEventActivity.this, R.style.MyAlertDialogStyle);
             builder.setTitle("Save Changes?");
@@ -841,9 +816,6 @@ public class CreateEventActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(CreateEventActivity.this, "saved", Toast.LENGTH_SHORT).show();
-
-
 
                     if (isCardForUpdate == true) {
                         deleteItemFromTable(eventDTO);
@@ -866,7 +838,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
                     //добавляем пары ключ-значение.
 
-
                     title = etCreateEventTitle.getText().toString();
 
                     beginDay = mDay;
@@ -884,7 +855,6 @@ public class CreateEventActivity extends AppCompatActivity {
                     description = etEventDescription.getText().toString();
 
                     event = new EventDTO(title, description, beginDay, beginMonth, beginYear);
-
 
                     contentValues.put(TABLE_EVENTS_KEY_TITLE, title);
                     contentValues.put(TABLE_EVENTS_KEY_LOCATION, location);
@@ -905,19 +875,13 @@ public class CreateEventActivity extends AppCompatActivity {
                     //сейчас он нам не нужен, поэтому он = null.
                     sqLiteDatabase.insert(TABLE_EVENTS_NAME, null, contentValues);
 
-
                     Log.d(LOG_TAG, "Date inserted");
 
-                    System.out.println(contentValues);
                     //закрываем соединение с БД.
                     dbHeper.close();
 
 ////////////////////////
-
                     isSavedFlagEvent = true;
-
-                    Toast.makeText(CreateEventActivity.this, event.toString(), Toast.LENGTH_SHORT).show();
-
                     isCardForUpdate = false;
                     CreateEventActivity.this.finish();
 
@@ -929,7 +893,6 @@ public class CreateEventActivity extends AppCompatActivity {
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
                     isCardForUpdate = false;
                     CreateEventActivity.this.finish();
                 }
@@ -975,5 +938,4 @@ public class CreateEventActivity extends AppCompatActivity {
         }
         super.onDestroy();
     }
-
 }

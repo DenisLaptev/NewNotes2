@@ -32,9 +32,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_NAME;
 import static ua.a5.newnotes.R.id.delete_item;
 import static ua.a5.newnotes.R.id.update_item;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_EVENTS;
-import static ua.a5.newnotes.utils.Constants.flagWhenItemDeletedAll;
-import static ua.a5.newnotes.utils.Constants.flagWhenItemDeletedThisMonth;
-import static ua.a5.newnotes.utils.Constants.flagWhenItemDeletedToday;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
 
 /**
@@ -42,7 +39,6 @@ import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
  */
 
 public class AllEventsListAdapter extends RecyclerView.Adapter<AllEventsListAdapter.EventsViewHolder> {
-
 
     public interface EventClickListener {
         void onClick(EventDTO eventDTO);
@@ -104,7 +100,6 @@ public class AllEventsListAdapter extends RecyclerView.Adapter<AllEventsListAdap
                         switch (it.getItemId()) {
                             case delete_item:
 
-                                //AlertDialog.Builder builder = new AlertDialog.Builder(StartMenuActivity.this, R.style.MyAlertDialogStyle);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
                                 builder.setTitle("Delete?");
                                 builder.setMessage("Do You Really Want To Delete?");

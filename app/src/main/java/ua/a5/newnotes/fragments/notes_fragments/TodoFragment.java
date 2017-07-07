@@ -41,10 +41,9 @@ import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
  */
 
 public class TodoFragment extends AbstractTabFragment implements TodoListAdapter.TodoClickListener {
+    private static final int LAYOUT = R.layout.fragment_todo;
 
     FloatingActionsMenu menuMultipleActions;
-
-    private static final int LAYOUT = R.layout.fragment_todo;
 
     //для работы с БД.
     DBHelper dbHelper;
@@ -126,8 +125,8 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
             }
         });
 
-        FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_notes_mainmenu);
-        actionMainmenu.setTitle("Main Menu");
+        FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_notes_quit);
+        actionMainmenu.setTitle("Quit");
         actionMainmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

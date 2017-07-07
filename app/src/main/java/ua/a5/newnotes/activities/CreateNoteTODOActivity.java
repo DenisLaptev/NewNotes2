@@ -30,7 +30,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -72,17 +71,15 @@ import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getDifferen
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsWords.getIntMonthFromString;
 
 public class CreateNoteTODOActivity extends AppCompatActivity {
+    static final int DATE_DIALOG_ID = 1;
+
+    public static SpannableString bufferSpannableString = null;
 
     boolean isSavedFlagTODO;
 
     private int mYear;
     private int mMonth;
     private int mDay;
-
-
-    static final int DATE_DIALOG_ID = 1;
-
-    public static SpannableString bufferSpannableString = null;
 
     String initialWord;
     String strRegExp;
@@ -96,6 +93,8 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
     DBHelper dbHelper;
 
     TodoDTO note;
+    TodoDTO todoDTO;
+
     String noteCategory;
     String noteTitle;
     int isDone;
@@ -103,9 +102,6 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
     int noteMonth;
     int noteYear;
     String noteDescription;
-
-    TodoDTO todoDTO;
-
 
 
     //для баннера////////////////////////////////////////////////////
@@ -126,6 +122,7 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
 
         toolbarTodo = (Toolbar) findViewById(R.id.toolbar_todo);
         toolbarTodo.setTitle("TODO");
+        toolbarTodo.setOverflowIcon(getResources().getDrawable(R.drawable.ic_dots_vertical));
         setSupportActionBar(toolbarTodo);
 
         if (mIsPremium == false) {
@@ -143,7 +140,7 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
             mAdView.loadAd(adRequest);
             //для баннера////////////////////////////////////////////////////
 
-            if(isCardForUpdate == false) {
+            if (isCardForUpdate == false) {
                 //для Interstitial////////////////////////////////////////////////////
                 mInterstitialAd = new InterstitialAd(this);
                 //set the ad unit ID
@@ -214,14 +211,14 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
             etCreateNoteTitle.setText(todoDTO.getTitle());
             etNoteDescription.setText(todoDTO.getDescription());
 
-            if(todoDTO.getMonth() + 1 < 10) {
+            if (todoDTO.getMonth() + 1 < 10) {
                 tvTodoDeadline.setText(
                         new StringBuilder()
                                 //Month is 0 based so add 1
                                 .append(todoDTO.getDay()).append("-0")
                                 .append(todoDTO.getMonth() + 1).append("-")
                                 .append(todoDTO.getYear()).append(" "));
-            }else{
+            } else {
                 tvTodoDeadline.setText(
                         new StringBuilder()
                                 //Month is 0 based so add 1
@@ -229,92 +226,9 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
                                 .append(todoDTO.getMonth() + 1).append("-")
                                 .append(todoDTO.getYear()).append(" "));
             }
+        } else {
+            todoDTO = new TodoDTO(new String(""), 0, getCurrentDay(), getCurrentMonth(), getCurrentYear(), new String(""));
         }
-        else{
-            todoDTO = new TodoDTO(new String(""),0,getCurrentDay(),getCurrentMonth(),getCurrentYear(),new String(""));
-        }
-
-
-
-
-
-
-
-
-
-
-        /*
-
-        btnCreateNoteSave = (Button) findViewById(R.id.note_btnCreateNoteTODOSave);
-        btnCreateNoteSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isCardForUpdate == true) {
-                    deleteItemFromTable(todoDTO);
-                }
-                isCardForUpdate = false;
-
-////////////////
-                //заполняем БД данными.
-
-                //класс SQLiteDatabase предназначен для управления БД SQLite.
-                //если БД не существует, dbHelper вызовет метод onCreate(),
-                //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
-
-                //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
-                SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-
-                //класс ContentValues используется для добавления новых строк в таблицу.
-                //каждый объект этого класса представляет собой одну строку таблицы и
-                //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
-                ContentValues contentValues = new ContentValues();
-
-                //добавляем пары ключ-значение.
-
-
-                noteTitle = etCreateNoteTitle.getText().toString();
-                isDone = 0;
-                noteDay = mDay;
-                noteMonth = mMonth;
-                noteYear = mYear;
-                noteDescription = etNoteDescription.getText().toString();
-
-                note = new TodoDTO(noteTitle, isDone, noteDay, noteMonth, noteYear, noteDescription);
-
-
-                contentValues.put(TABLE_NOTES_TODO_KEY_TITLE, noteTitle);
-                contentValues.put(TABLE_NOTES_TODO_KEY_ISDONE, isDone);
-                contentValues.put(TABLE_NOTES_TODO_KEY_DAY, noteDay);
-                contentValues.put(TABLE_NOTES_TODO_KEY_MONTH, noteMonth);
-                contentValues.put(TABLE_NOTES_TODO_KEY_YEAR, noteYear);
-                contentValues.put(TABLE_NOTES_TODO_KEY_DESCRIPTION, noteDescription);
-                //id заполнится автоматически.
-
-                //вставляем подготовленные строки в таблицу.
-                //второй аргумент используется для вставки пустой строки,
-                //сейчас он нам не нужен, поэтому он = null.
-                sqLiteDatabase.insert(DBHelper.TABLE_NOTES_TODO_NAME, null, contentValues);
-                Log.d(LOG_TAG, "Date inserted");
-                //закрываем соединение с БД.
-                dbHelper.close();
-////////////////////////
-                isSavedFlagTODO = true;
-
-            }
-        });
-
-        btnCreateNoteNotesMenu = (Button) findViewById(R.id.note_btnCreateNoteTODONotesMenu);
-        btnCreateNoteNotesMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isCardForUpdate = false;
-                onBackPressed();
-                finish();
-            }
-        });
-
-        */
-
     }
 
 
@@ -328,11 +242,7 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
-
             case R.id.menu_todo_save:
-                Toast.makeText(this, "save", Toast.LENGTH_SHORT).show();
-
-
                 if (isCardForUpdate == true) {
                     deleteItemFromTable(todoDTO);
                 }
@@ -383,14 +293,9 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
                 dbHelper.close();
 ////////////////////////
                 isSavedFlagTODO = true;
-
-                Toast.makeText(this, note.toString(), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.menu_todo_delete:
-                Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteTODOActivity.this, R.style.MyAlertDialogStyle);
                 builder.setTitle("Delete?");
                 builder.setMessage("Do You Really Want To Delete?");
@@ -419,27 +324,7 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
 
         isCardForUpdate = false;
         return true;
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private void showInterstitial() {
@@ -790,14 +675,14 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
     //For DatePicker
     private void updateDisplay() {
 
-        if(mMonth + 1 < 10) {
+        if (mMonth + 1 < 10) {
             this.tvTodoDeadline.setText(
                     new StringBuilder()
                             // Month is 0 based so add 1
                             .append(mDay).append("-0")
                             .append(mMonth + 1).append("-")
                             .append(mYear).append(" "));
-        }else{
+        } else {
             this.tvTodoDeadline.setText(
                     new StringBuilder()
                             // Month is 0 based so add 1
@@ -841,10 +726,6 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(CreateNoteTODOActivity.this, "saved", Toast.LENGTH_SHORT).show();
-
-
-
                     if (isCardForUpdate == true) {
                         deleteItemFromTable(todoDTO);
                     }
@@ -895,11 +776,8 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
                     dbHelper.close();
 ////////////////////////
                     isSavedFlagTODO = true;
-
-
                     isCardForUpdate = false;
                     CreateNoteTODOActivity.this.finish();
-
                 }
 
             });
@@ -908,7 +786,6 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
                     isCardForUpdate = false;
                     CreateNoteTODOActivity.this.finish();
                 }
@@ -928,9 +805,7 @@ public class CreateNoteTODOActivity extends AppCompatActivity {
             CreateNoteTODOActivity.this.finish();
             super.onBackPressed();
         }
-
     }
-
 
 
     @Override

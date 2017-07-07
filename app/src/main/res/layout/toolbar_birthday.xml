@@ -13,5 +13,4 @@
     app:popupTheme="@style/ThemeOverlay.AppCompat">
 
     <!--android:minHeight="?attr/actionBarSize"-->
-
 </android.support.v7.widget.Toolbar>

@@ -28,7 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            >
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -42,7 +43,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <LinearLayout
                         android:id="@+id/event_title_linear_layout"
@@ -54,7 +56,8 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Title: " />
+                            android:text="Title "
+                            android:textSize="25sp"/>
 
                         <LinearLayout
                             android:layout_width="0px"
@@ -64,11 +67,17 @@
 
                         <EditText
                             android:id="@+id/event_etCreateEventTitle"
-                            style="@style/UserDataTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Event Title" />
+                            android:hint="Event Title"
+                            android:background="@android:color/transparent"
+                            android:textSize="25sp"
+                            />
                     </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
 
 
                     <LinearLayout
@@ -80,15 +89,15 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Deadline: " />
+                            android:text="Deadline "
+                            android:textSize="25sp"/>
 
                         <TextView
                             android:id="@+id/tv_events_deadline_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="Deadline Date"
-                            android:textColor="@color/color_item_activity_date"
-                            android:textSize="@dimen/item_activity_date_size" />
+                            android:textSize="25sp" />
 
                         <ImageView
                             android:id="@+id/iv_event_calendar"
@@ -107,7 +116,7 @@
                         android:id="@+id/et_event_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+
                         android:autoLink="all"
                         android:background="@null"
                         android:hint="Description of Event"

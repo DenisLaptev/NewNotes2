@@ -35,10 +35,9 @@ import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
  */
 
 public class IdeasFragment extends AbstractTabFragment implements IdeasListAdapter.IdeaClickListener {
+    private static final int LAYOUT = R.layout.fragment_ideas;
 
     FloatingActionsMenu menuMultipleActions;
-
-    private static final int LAYOUT = R.layout.fragment_ideas;
 
     //для работы с БД.
     DBHelper dbHelper;

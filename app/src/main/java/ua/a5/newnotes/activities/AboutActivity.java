@@ -16,8 +16,6 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        //setContentView(R.layout.activity_layout_test);
-
 
         btnAboutBack = (Button) findViewById(R.id.btnAboutBack);
         btnAboutBack.setOnClickListener(new View.OnClickListener() {
@@ -26,8 +24,6 @@ public class AboutActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-
     }
 
     //set white background to the Activity.
@@ -37,6 +33,4 @@ public class AboutActivity extends AppCompatActivity {
         RelativeLayout rl = (RelativeLayout)findViewById(R.id.about_relative_layout);
         rl.setBackgroundColor(getResources().getColor(R.color.colorBackgroundWhite));
     }
-
-
 }

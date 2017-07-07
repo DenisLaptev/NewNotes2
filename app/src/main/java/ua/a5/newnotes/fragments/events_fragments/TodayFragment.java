@@ -58,10 +58,9 @@ import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getCurrentD
  */
 
 public class TodayFragment extends AbstractTabFragment implements TodayEventsListAdapter.EventClickListener {
+    private static final int LAYOUT = R.layout.fragment_events_today;
 
     FloatingActionsMenu menuMultipleActions;
-
-    private static final int LAYOUT = R.layout.fragment_events_today;
 
     //для работы с БД.
     DBHelper dbHelper;
@@ -123,8 +122,8 @@ public class TodayFragment extends AbstractTabFragment implements TodayEventsLis
         });
 
 
-        FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_events_mainmenu);
-        actionMainmenu.setTitle("Main Menu");
+        FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_events_quit);
+        actionMainmenu.setTitle("Quit");
         actionMainmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -53,10 +53,9 @@ import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getCurrentM
  */
 
 public class ThisMonthFragment extends AbstractTabFragment implements TodayEventsListAdapter.EventClickListener {
+    private static final int LAYOUT = R.layout.fragment_events_thismonth;
 
     FloatingActionsMenu menuMultipleActions;
-
-    private static final int LAYOUT = R.layout.fragment_events_thismonth;
 
     //для работы с БД.
     DBHelper dbHelper;

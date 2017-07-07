@@ -107,7 +107,6 @@ public class StartMenuActivity extends AppCompatActivity implements GoogleApiCli
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-
                 });
                 builder.show();
             }

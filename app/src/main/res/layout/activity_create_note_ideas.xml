@@ -44,7 +44,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
 
                     <RelativeLayout
@@ -59,7 +60,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:text="Date"
-                            android:layout_alignParentLeft="true" />
+                            android:layout_alignParentLeft="true"
+                            android:textSize="25sp"/>
 
                         <TextView
                             android:id="@+id/note_tvCreateNoteIdeasTime"
@@ -68,7 +70,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:text="Time"
-                            android:layout_alignParentRight="true" />
+                            android:layout_alignParentRight="true"
+                            android:textSize="25sp"/>
                     </RelativeLayout>
 
                     <TextView
@@ -87,7 +90,8 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Title: " />
+                            android:text="Title "
+                            android:textSize="25sp"/>
 
                         <LinearLayout
                             android:layout_width="0px"
@@ -97,10 +101,11 @@
 
                         <EditText
                             android:id="@+id/note_etCreateNoteIdeasTitle"
-                            style="@style/UserDataTextStyle"
+                            android:background="@android:color/transparent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Note Title" />
+                            android:hint="Note Title"
+                            android:textSize="25sp"/>
                     </LinearLayout>
 
 
@@ -112,7 +117,7 @@
                         android:id="@+id/et_note_ideas_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+
                         android:autoLink="all"
                         android:background="@null"
                         android:hint="Type your idea..."

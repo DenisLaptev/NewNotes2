@@ -26,7 +26,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -65,10 +64,9 @@ import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getDifferen
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsWords.getIntMonthFromString;
 
 public class CreateNoteIdeasActivity extends AppCompatActivity {
+    public static SpannableString bufferSpannableString = null;
 
     boolean isSavedFlagIdea;
-
-    public static SpannableString bufferSpannableString = null;
 
     String initialWord;
     String strRegExp;
@@ -79,17 +77,16 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
     EditText etCreateNoteTitle;
     EditText etNoteDescription;
 
-
     //для работы с БД.
     DBHelper dbHelper;
 
     IdeaDTO note;
+    IdeaDTO ideaDTO;
+
     String noteCategory;
     String noteTitle;
     String noteDescription;
     String noteDate;
-
-    IdeaDTO ideaDTO;
 
 
     //для баннера////////////////////////////////////////////////////
@@ -100,7 +97,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
     //для Interstitial////////////////////////////////////////////////////
     InterstitialAd mInterstitialAd;
     //для Interstitial////////////////////////////////////////////////////
-
 
     private Toolbar toolbarIdea;
 
@@ -196,76 +192,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
                     )
             );
         }
-
-
-
-       /*
-
-
-        btnCreateNoteSave = (Button) findViewById(R.id.note_btnCreateNoteIdeasSave);
-        btnCreateNoteSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isCardForUpdate == true) {
-                    deleteItemFromTable(ideaDTO);
-                }
-                isCardForUpdate = false;
-
-////////////////
-                //заполняем БД данными.
-
-                //класс SQLiteDatabase предназначен для управления БД SQLite.
-                //если БД не существует, dbHelper вызовет метод onCreate(),
-                //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
-
-                //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
-                SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-
-                //класс ContentValues используется для добавления новых строк в таблицу.
-                //каждый объект этого класса представляет собой одну строку таблицы и
-                //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
-                ContentValues contentValues = new ContentValues();
-
-                //добавляем пары ключ-значение.
-
-
-                noteTitle = etCreateNoteTitle.getText().toString();
-                noteDescription = etNoteDescription.getText().toString();
-                noteDate = tvCreateNoteDate.getText().toString();
-
-                note = new IdeaDTO(noteTitle, noteDescription, noteDate);
-
-                contentValues.put(TABLE_NOTES_IDEAS_KEY_TITLE, noteTitle);
-                contentValues.put(TABLE_NOTES_IDEAS_KEY_DATE, noteDate);
-                contentValues.put(TABLE_NOTES_IDEAS_KEY_DESCRIPTION, noteDescription);
-                //id заполнится автоматически.
-
-                //вставляем подготовленные строки в таблицу.
-                //второй аргумент используется для вставки пустой строки,
-                //сейчас он нам не нужен, поэтому он = null.
-                sqLiteDatabase.insert(DBHelper.TABLE_NOTES_IDEAS_NAME, null, contentValues);
-                Log.d(LOG_TAG, "Date inserted");
-                //закрываем соединение с БД.
-                dbHelper.close();
-////////////////////////
-                isSavedFlagIdea = true;
-
-            }
-        });
-
-        btnCreateNoteNotesMenu = (Button) findViewById(R.id.note_btnCreateNoteIdeasNotesMenu);
-        btnCreateNoteNotesMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isCardForUpdate = false;
-                onBackPressed();
-                finish();
-            }
-        });
-
-
-        */
-
     }
 
 
@@ -280,7 +206,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.menu_idea_save:
-                Toast.makeText(this, "save", Toast.LENGTH_SHORT).show();
 
                 if (isCardForUpdate == true) {
                     deleteItemFromTable(ideaDTO);
@@ -325,14 +250,9 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
                 dbHelper.close();
 ////////////////////////
                 isSavedFlagIdea = true;
-
-                Toast.makeText(this, note.toString(), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.menu_idea_delete:
-                Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteIdeasActivity.this, R.style.MyAlertDialogStyle);
                 builder.setTitle("Delete?");
                 builder.setMessage("Do You Really Want To Delete?");
@@ -358,10 +278,8 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
                 builder.show();
                 break;
         }
-
         isCardForUpdate = false;
         return true;
-
     }
 
 
@@ -470,7 +388,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
                 month = getCurrentMonth();
             }
 
-
             int year1 = getCurrentYear();
             if (m.group(5) != null) {
                 year1 = Integer.parseInt(m.group(5));
@@ -484,7 +401,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             }
 
             final int year = year1;
-
             final int hour = getCurrentHour();
             final int minute = getCurrentMinute();
 
@@ -770,7 +686,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-
         if (!isSavedFlagIdea) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteIdeasActivity.this, R.style.MyAlertDialogStyle);
             builder.setTitle("Save Changes?");
@@ -780,15 +695,10 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(CreateNoteIdeasActivity.this, "saved", Toast.LENGTH_SHORT).show();
-
-
-
                     if (isCardForUpdate == true) {
                         deleteItemFromTable(ideaDTO);
                     }
                     isCardForUpdate = false;
-
 ////////////////
                     //заполняем БД данными.
 
@@ -827,11 +737,8 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
                     dbHelper.close();
 ////////////////////////
                     isSavedFlagIdea = true;
-
-
                     isCardForUpdate = false;
                     CreateNoteIdeasActivity.this.finish();
-
                 }
 
             });
@@ -860,7 +767,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             CreateNoteIdeasActivity.this.finish();
             super.onBackPressed();
         }
-
     }
 
 

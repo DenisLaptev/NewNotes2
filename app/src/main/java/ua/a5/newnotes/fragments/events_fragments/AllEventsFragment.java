@@ -52,10 +52,9 @@ import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
  */
 
 public class AllEventsFragment extends AbstractTabFragment implements TodayEventsListAdapter.EventClickListener {
+    private static final int LAYOUT = R.layout.fragment_events_all;
 
     FloatingActionsMenu menuMultipleActions;
-
-    private static final int LAYOUT = R.layout.fragment_events_all;
 
 
     //для работы с БД.
@@ -116,8 +115,6 @@ public class AllEventsFragment extends AbstractTabFragment implements TodayEvent
             flagWhenItemDeletedAll = false;
         }
         return view;
-
-
     }
 
 

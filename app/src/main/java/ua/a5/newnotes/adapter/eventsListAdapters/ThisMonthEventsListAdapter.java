@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,7 +38,6 @@ import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
  */
 
 public class ThisMonthEventsListAdapter extends RecyclerView.Adapter<ThisMonthEventsListAdapter.EventsViewHolder> {
-
 
     public interface EventClickListener {
         void onClick(EventDTO eventDTO);

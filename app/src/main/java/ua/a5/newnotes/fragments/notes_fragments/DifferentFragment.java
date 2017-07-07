@@ -34,10 +34,9 @@ import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
  */
 
 public class DifferentFragment extends AbstractTabFragment implements DifferentListAdapter.DifferentClickListener {
+    private static final int LAYOUT = R.layout.fragment_different;
 
     FloatingActionsMenu menuMultipleActions;
-
-    private static final int LAYOUT = R.layout.fragment_different;
 
     //для работы с БД.
     DBHelper dbHelper;

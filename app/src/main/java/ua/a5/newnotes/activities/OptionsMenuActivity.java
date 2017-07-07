@@ -43,9 +43,6 @@ public class OptionsMenuActivity
         OnConnectionFailedListener,
         ServerAuthCodeCallbacks {
 
-    //For Leaderboard
-    //public GoogleApiClient mGoogleApiClient;  // initialized in onCreate
-    //For Leaderboard
 
     //переменная указывает, есть ли соединение с интернетом или нет.
     boolean isOnLine = false;
@@ -75,19 +72,7 @@ public class OptionsMenuActivity
         setContentView(R.layout.activity_options_menu);
 
         base64EncodedPublicKey = getString(R.string.billing_pubkey);
-        /*
-        //For Leaderboard
-        // Create the Google Api Client with access to the Play Game and Drive services.
-        mGoogleApiClient = new Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Plus.API, Plus.PlusOptions.builder().build())
-                .addScope(Plus.SCOPE_PLUS_LOGIN)
-                //.addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                .addApi(Drive.API).addScope(Drive.SCOPE_APPFOLDER) // Drive API
-                .build();
-        //For Leaderboard
-       */
+
         //For billing.
         mHelper = new IabHelper(this, base64EncodedPublicKey);
 
@@ -113,17 +98,13 @@ public class OptionsMenuActivity
 
                 isOnLine = isOnline();
                 if (isOnLine == true) {
-                    Toast.makeText(getApplicationContext(), "MoreApps", Toast.LENGTH_SHORT).show();
-
-
                     String url = "https://play.google.com/store/apps/developer?id=a5.ua&hl=en";
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(url));
                     startActivity(i);
 
-
                 } else {
-                    Toast.makeText(getApplicationContext(), "no Internet connection",
+                    Toast.makeText(getApplicationContext(), "No Internet",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -134,12 +115,10 @@ public class OptionsMenuActivity
             @Override
             public void onClick(View v) {
 
-
                 isOnLine = isOnline();
 
                 if (isOnLine == true) {
 
-                    Toast.makeText(getApplicationContext(), "Upgrade", Toast.LENGTH_SHORT).show();
                     try {
                         mHelper.launchPurchaseFlow(OptionsMenuActivity.this, ITEM_SKU_PREMIUM, REQUEST_CODE_INT, mPurchaseFinishedListener, "ITEM_SKU_PREMIUM");
                         //mHelper.launchPurchaseFlow(OptionsMenuActivity.this, ITEM_SKU_TEST, REQUEST_CODE_INT,mPurchaseFinishedListener, "ITEM_SKU_TEST");
@@ -148,7 +127,7 @@ public class OptionsMenuActivity
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "no Internet connection",
+                    Toast.makeText(getApplicationContext(), "No Internet",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -196,17 +175,6 @@ public class OptionsMenuActivity
         }
     };
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        /*
-//For Leaderboard
-        mGoogleApiClient.connect();
-//For Leaderboard
-        */
-
-    }
 
 
     @Override
@@ -368,11 +336,7 @@ public class OptionsMenuActivity
         PublicKey key = Security.generatePublicKey(base64PublicKey);
         return Security.verify(key, signedData, signature);
     }
-
-
 //For billing.
-
-
 }
 
 

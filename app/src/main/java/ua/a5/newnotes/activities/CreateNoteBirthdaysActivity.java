@@ -19,7 +19,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -47,32 +46,28 @@ import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getCurrentM
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getCurrentYear;
 
 public class CreateNoteBirthdaysActivity extends AppCompatActivity {
-
+    static final int DATE_DIALOG_ID = 0;
     boolean isSavedFlagBirthday;
 
     private int mYear;
     private int mMonth;
     private int mDay;
 
-    static final int DATE_DIALOG_ID = 0;
-
-
     EditText etName;
     private TextView dateDisplay;
     private ImageView ivPickDate;
-
 
     //для работы с БД.
     DBHelper dbHelper;
 
     BirthdayDTO note;
+    BirthdayDTO birthdayDTO;
+
     String noteCategory;
     String noteName;
     int noteDay;
     int noteMonth;
     int noteYear;
-
-    BirthdayDTO birthdayDTO;
 
 
     //для баннера////////////////////////////////////////////////////
@@ -82,7 +77,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
     //для Interstitial////////////////////////////////////////////////////
     InterstitialAd mInterstitialAd;
     //для Interstitial////////////////////////////////////////////////////
-
 
     private Toolbar toolbarBirthday;
 
@@ -132,7 +126,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
         //для работы с БД.
         dbHelper = new DBHelper(this);
 
-
         etName = (EditText) findViewById(R.id.et_name);
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
@@ -148,7 +141,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
 
         dateDisplay = (TextView) findViewById(R.id.tv_birthday_date);
         ivPickDate = (ImageView) findViewById(R.id.iv_date_picker);
-
         ivPickDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DATE_DIALOG_ID);
@@ -194,86 +186,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
                     getCurrentYear()
             );
         }
-
-
-
-
-
-
-
-        /*
-
-        btnSaveBirthdayNote = (Button) findViewById(R.id.btn_save);
-        btnSaveBirthdayNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (isCardForUpdate == true) {
-                    deleteItemFromTable(birthdayDTO);
-                }
-                isCardForUpdate = false;
-
-////////////////
-                //заполняем БД данными.
-
-                //класс SQLiteDatabase предназначен для управления БД SQLite.
-                //если БД не существует, dbHelper вызовет метод onCreate(),
-                //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
-
-                //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
-                SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-
-                //класс ContentValues используется для добавления новых строк в таблицу.
-                //каждый объект этого класса представляет собой одну строку таблицы и
-                //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
-                ContentValues contentValues = new ContentValues();
-
-                //добавляем пары ключ-значение.
-
-                noteCategory = "birthdays";
-                noteName = etName.getText().toString();
-                noteDay = mDay;
-                noteMonth = mMonth;
-                noteYear = mYear;
-
-                note = new BirthdayDTO(noteName, noteDay, noteMonth, noteYear);
-
-                contentValues.put(TABLE_NOTES_BIRTHDAYS_KEY_NAME, noteName);
-                contentValues.put(TABLE_NOTES_BIRTHDAYS_KEY_DAY, noteDay);
-                contentValues.put(TABLE_NOTES_BIRTHDAYS_KEY_MONTH, noteMonth);
-                contentValues.put(TABLE_NOTES_BIRTHDAYS_KEY_YEAR, noteYear);
-                //id заполнится автоматически.
-
-                //вставляем подготовленные строки в таблицу.
-                //второй аргумент используется для вставки пустой строки,
-                //сейчас он нам не нужен, поэтому он = null.
-                sqLiteDatabase.insert(DBHelper.TABLE_NOTES_BIRTHDAYS_NAME, null, contentValues);
-                Log.d(LOG_TAG, "Date inserted");
-                //закрываем соединение с БД.
-                dbHelper.close();
-////////////////////////
-
-                isSavedFlagBirthday = true;
-            }
-        });
-
-        btnAllNotes = (Button) findViewById(R.id.btn_allnotes);
-        btnAllNotes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isCardForUpdate = false;
-                onBackPressed();
-                finish();
-            }
-        });
-
-  */
     }
-
-
-
-
-
 
 
     @Override
@@ -287,9 +200,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.menu_birthday_save:
-                Toast.makeText(this, "save", Toast.LENGTH_SHORT).show();
-
-
                 if (isCardForUpdate == true) {
                     deleteItemFromTable(birthdayDTO);
                 }
@@ -334,15 +244,10 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
                 //закрываем соединение с БД.
                 dbHelper.close();
 ////////////////////////
-
                 isSavedFlagBirthday = true;
-
-                Toast.makeText(this, note.toString(), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.menu_birthday_delete:
-                Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteBirthdaysActivity.this, R.style.MyAlertDialogStyle);
                 builder.setTitle("Delete?");
                 builder.setMessage("Do You Really Want To Delete?");
@@ -362,40 +267,13 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
-
                 });
                 builder.show();
-
-
                 break;
         }
-
         isCardForUpdate = false;
         return true;
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private void showInterstitial() {
@@ -483,7 +361,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-
         if (!isSavedFlagBirthday) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteBirthdaysActivity.this, R.style.MyAlertDialogStyle);
             builder.setTitle("Save Changes?");
@@ -493,8 +370,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(CreateNoteBirthdaysActivity.this, "saved", Toast.LENGTH_SHORT).show();
-
 
                     if (isCardForUpdate == true) {
                         deleteItemFromTable(birthdayDTO);
@@ -542,11 +417,8 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
 ////////////////////////
 
                     isSavedFlagBirthday = true;
-
-
                     isCardForUpdate = false;
                     CreateNoteBirthdaysActivity.this.finish();
-
                 }
 
             });
@@ -555,7 +427,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
                     isCardForUpdate = false;
                     CreateNoteBirthdaysActivity.this.finish();
                 }
@@ -577,35 +448,6 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
         }
     }
 
-
-
-    /*
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        isCardForUpdate = false;
-
-        if (isSavedFlagBirthday) {
-            BirthdayDTO newBirthdayDTO = new BirthdayDTO(
-                    etName.getText().toString(),
-                    mDay,
-                    mMonth,
-                    mYear
-            );
-
-            Intent intent = new Intent(this, BirthdayActivity.class);
-            intent.putExtra(KEY_BIRTHDAY_DTO, newBirthdayDTO);
-            startActivity(intent);
-            finish();
-        } else {
-            Intent intent = new Intent(this, BirthdayActivity.class);
-            intent.putExtra(KEY_BIRTHDAY_DTO, birthdayDTO);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-*/
 
     @Override
     public void onPause() {

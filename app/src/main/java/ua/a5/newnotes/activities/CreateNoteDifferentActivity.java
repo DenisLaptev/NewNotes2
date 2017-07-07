@@ -26,7 +26,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -65,10 +64,9 @@ import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getDifferen
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsWords.getIntMonthFromString;
 
 public class CreateNoteDifferentActivity extends AppCompatActivity {
+    public static SpannableString bufferSpannableString = null;
 
     boolean isSavedFlagDifferent;
-
-    public static SpannableString bufferSpannableString = null;
 
     String initialWord;
     String strRegExp;
@@ -79,18 +77,16 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
     EditText etCreateNoteTitle;
     EditText etNoteDescription;
 
-
     //для работы с БД.
     DBHelper dbHelper;
 
     DifferentDTO note;
+    DifferentDTO differentDTO;
+
     String noteCategory;
     String noteTitle;
     String noteDescription;
     String noteDate;
-
-    DifferentDTO differentDTO;
-
 
     //для баннера////////////////////////////////////////////////////
     protected AdView mAdView;
@@ -99,7 +95,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
     //для Interstitial////////////////////////////////////////////////////
     InterstitialAd mInterstitialAd;
     //для Interstitial////////////////////////////////////////////////////
-
 
     private Toolbar toolbarDifferent;
 
@@ -116,7 +111,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
 //Initializing the Google Mobile Ads SDK
             MobileAds.initialize(getApplicationContext(), getString(R.string.admob_app_id));
 //Initializing the Google Mobile Ads SDK
-
 
             //для баннера////////////////////////////////////////////////////
             mAdView = (AdView) findViewById(R.id.adView);
@@ -150,7 +144,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
         //для работы с БД.
         dbHelper = new DBHelper(this);
         setDateAndTime();
-
 
         etCreateNoteTitle = (EditText) findViewById(R.id.et_diff_title);
         //этот слушатель позволяет убирать клавиатуру EditText
@@ -194,82 +187,7 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                     )
             );
         }
-
-
-
-        /*
-
-        btnCreateNoteSave = (Button) findViewById(R.id.btn_diff_save);
-        btnCreateNoteSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isCardForUpdate == true) {
-                    deleteItemFromTable(differentDTO);
-                }
-                isCardForUpdate = false;
-
-////////////////
-                //заполняем БД данными.
-
-                //класс SQLiteDatabase предназначен для управления БД SQLite.
-                //если БД не существует, dbHelper вызовет метод onCreate(),
-                //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
-
-                //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
-                SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-
-                //класс ContentValues используется для добавления новых строк в таблицу.
-                //каждый объект этого класса представляет собой одну строку таблицы и
-                //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
-                ContentValues contentValues = new ContentValues();
-
-                //добавляем пары ключ-значение.
-
-                noteCategory = "different";
-                noteTitle = etCreateNoteTitle.getText().toString();
-                noteDescription = etNoteDescription.getText().toString();
-                noteDate = tvCreateNoteDate.getText().toString();
-
-
-
-                note = new DifferentDTO(noteTitle, noteDescription, noteDate);
-                System.out.println(note);
-
-
-
-                contentValues.put(TABLE_NOTES_DIFFERENT_KEY_TITLE, noteTitle);
-                contentValues.put(TABLE_NOTES_DIFFERENT_KEY_DATE, noteDate);
-                contentValues.put(TABLE_NOTES_DIFFERENT_KEY_DESCRIPTION, noteDescription);
-                //id заполнится автоматически.
-
-                //вставляем подготовленные строки в таблицу.
-                //второй аргумент используется для вставки пустой строки,
-                //сейчас он нам не нужен, поэтому он = null.
-                sqLiteDatabase.insert(DBHelper.TABLE_NOTES_DIFFERENT_NAME, null, contentValues);
-                Log.d(LOG_TAG, "Date inserted");
-                //закрываем соединение с БД.
-                dbHelper.close();
-////////////////////////
-
-                isSavedFlagDifferent = true;
-            }
-        });
-
-        btnCreateNoteNotesMenu = (Button) findViewById(R.id.btn_diff_allnotes);
-        btnCreateNoteNotesMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isCardForUpdate = false;
-                onBackPressed();
-                finish();
-            }
-        });
-
-
-        */
-
     }
-
 
 
     @Override
@@ -283,8 +201,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.menu_different_save:
-                Toast.makeText(this, "save", Toast.LENGTH_SHORT).show();
-
                 if (isCardForUpdate == true) {
                     deleteItemFromTable(differentDTO);
                 }
@@ -332,16 +248,10 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                 //закрываем соединение с БД.
                 dbHelper.close();
 ////////////////////////
-
                 isSavedFlagDifferent = true;
-
-                Toast.makeText(this, note.toString(), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.menu_different_delete:
-                Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
-
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteDifferentActivity.this, R.style.MyAlertDialogStyle);
                 builder.setTitle("Delete?");
                 builder.setMessage("Do You Really Want To Delete?");
@@ -367,18 +277,9 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                 builder.show();
                 break;
         }
-
         isCardForUpdate = false;
         return true;
-
     }
-
-
-
-
-
-
-
 
 
     private void showInterstitial() {
@@ -456,7 +357,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                     etNoteDescription.setMovementMethod(LinkMovementMethod.getInstance());
                     etNoteDescription.setSelection(etNoteDescription.getText().length());
 
-
                 } catch (NumberFormatException nfe) {
                     nfe.printStackTrace();
                 }
@@ -496,13 +396,11 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
             }
 
             final int year = year1;
-
             final int hour = getCurrentHour();
             final int minute = getCurrentMinute();
 
 
 //String regExp = "(\\d{1,2})(\\s*)(января|янв|февраля|фев|марта|мар|апреля|апр|май|мая|июня|июн|июля|июл|августа|авг|сентября|сен|октября|окт|ноября|ноя|декабря|дек)(\\s*)(\\d{2,4}){0,1}";
-
 
             if (m.group(5) != null) {
 
@@ -781,7 +679,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-
         if (!isSavedFlagDifferent) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteDifferentActivity.this, R.style.MyAlertDialogStyle);
             builder.setTitle("Save Changes?");
@@ -791,9 +688,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(CreateNoteDifferentActivity.this, "saved", Toast.LENGTH_SHORT).show();
-
-
 
                     if (isCardForUpdate == true) {
                         deleteItemFromTable(differentDTO);
@@ -823,10 +717,8 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                     noteDate = tvCreateNoteDate.getText().toString();
 
 
-
                     note = new DifferentDTO(noteTitle, noteDescription, noteDate);
                     System.out.println(note);
-
 
 
                     contentValues.put(TABLE_NOTES_DIFFERENT_KEY_TITLE, noteTitle);
@@ -842,13 +734,9 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                     //закрываем соединение с БД.
                     dbHelper.close();
 ////////////////////////
-
                     isSavedFlagDifferent = true;
-
-
                     isCardForUpdate = false;
                     CreateNoteDifferentActivity.this.finish();
-
                 }
 
             });

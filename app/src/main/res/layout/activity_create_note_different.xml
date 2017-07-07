@@ -45,7 +45,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
 
                     <RelativeLayout
@@ -60,7 +61,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
-                            android:text="Date" />
+                            android:text="Date"
+                            android:textSize="25sp"/>
 
                         <TextView
                             android:id="@+id/note_tvCreateNoteDifferentTime"
@@ -69,7 +71,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:text="Time" />
+                            android:text="Time"
+                            android:textSize="25sp"/>
                     </RelativeLayout>
 
                     <TextView
@@ -86,15 +89,17 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Title:" />
+                            android:text="Title "
+                            android:textSize="25sp"/>
 
 
                         <EditText
                             android:id="@+id/et_diff_title"
-                            style="@style/UserDataTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Note Title" />
+                            android:hint="Note Title"
+                            android:textSize="25sp"
+                            android:background="@android:color/transparent"/>
 
                     </LinearLayout>
 
@@ -106,7 +111,7 @@
                         android:id="@+id/et_diff_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+
                         android:autoLink="all"
                         android:background="@null"
                         android:hint="Type your note..."

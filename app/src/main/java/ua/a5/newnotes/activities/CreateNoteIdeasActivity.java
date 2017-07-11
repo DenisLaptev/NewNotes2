@@ -48,7 +48,8 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_DATE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_DESCRIPTION;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_NAME;
-import static ua.a5.newnotes.activities.OptionsMenuActivity.mIsPremium;
+
+import static ua.a5.newnotes.activities.NotesActivity.mIsPremium;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_IDEAS;
 import static ua.a5.newnotes.utils.Constants.LOG_TAG;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
@@ -106,7 +107,9 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_note_ideas);
 
         toolbarIdea = (Toolbar) findViewById(R.id.toolbar_idea);
-        toolbarIdea.setTitle("IDEA");
+        toolbarIdea.setTitle(R.string.toolbartitle_idea);
+        toolbarIdea.setTitleTextAppearance(this,R.style.toolbar_title_style);
+        toolbarIdea.setOverflowIcon(getResources().getDrawable(R.drawable.ic_dots_vertical));
         setSupportActionBar(toolbarIdea);
 
         if (mIsPremium == false) {
@@ -120,7 +123,7 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                     // Check the LogCat to get your test device ID
-                    .addTestDevice("9E89078D0DC2D94ADC3D89109C5B6E24")
+                    .addTestDevice(getString(R.string.ads_testdevice_number))
                     .build();
             mAdView.loadAd(adRequest);
             //для баннера////////////////////////////////////////////////////
@@ -254,11 +257,11 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
 
             case R.id.menu_idea_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteIdeasActivity.this, R.style.MyAlertDialogStyle);
-                builder.setTitle("Delete?");
-                builder.setMessage("Do You Really Want To Delete?");
+                builder.setTitle(R.string.deletedialog_title);
+                builder.setMessage(R.string.deletedialog_message);
 
                 //positive button.
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deleteItemFromTable(ideaDTO);
@@ -269,7 +272,7 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
                 });
 
                 //negative button.
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -688,11 +691,11 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
 
         if (!isSavedFlagIdea) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteIdeasActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle("Save Changes?");
-            builder.setMessage("Do You Want To Save Changes?");
+            builder.setTitle(R.string.savedialog_title);
+            builder.setMessage(R.string.savedialog_message);
 
             //positive button.
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (isCardForUpdate == true) {
@@ -744,7 +747,7 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             });
 
             //negative button.
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -754,7 +757,7 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             });
 
             //negative button.
-            builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 

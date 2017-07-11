@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EVENT"
+                android:text="@string/itemmarker_event"
                 android:textColor="@color/color_marker_event"
                 android:textSize="20sp"
                 android:textStyle="bold" />

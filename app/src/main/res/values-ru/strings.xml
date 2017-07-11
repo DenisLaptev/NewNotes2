@@ -1,0 +1,101 @@
+<resources>
+    <string name="admob_app_id">ca-app-pub-7986696519803132~8675083605</string>
+    <string name="banner_home_footer">ca-app-pub-7986696519803132/1151816806</string>
+    <string name="interstitial_full_screen">ca-app-pub-7986696519803132/2628550005</string>
+    <string name="ads_testdevice_number">9E89078D0DC2D94ADC3D89109C5B6E24</string>
+
+    <string name="billing_pubkey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkm2CrMoOeLISKGMYbslJBdSuWd5v9fYA2jF0bFOCG2RgLuEHMSBHNsOowk6vHF1v+j0LqF4C7BpuxgvvHaQIpt2Ofwk1JP15lAJabTPcbSufzqGGxwKB9VrWwSPEZv9gOKPfN9oBrMLeh6PALRRsWnXELCY1OysAYZUofVWPze2GzvGoJ86EXbE/QvcrR8YGK9R3EvjqYezHVQbVD0w3DVgNoltgH2c4eKOoHX7pVs9xQChYpc+v7a08fjVYgVl9sknGZyU2r97jKZqu9ykuNVAAcCFhJadg7db5W8CPFMNxETc71dC+dCG6gwsSTjEIM42AXq7irru+OGT5ziuwiwIDAQAB</string>
+
+
+    <string name="app_name">Smart Notes</string>
+    <string name="toolbar_title">Умные заметки</string>
+
+    <string name="tab_item_different">Разное</string>
+    <string name="tab_item_ideas">Идеи</string>
+    <string name="tab_item_todo">Сделать</string>
+    <string name="tab_item_birthdays">Дни рождения</string>
+
+    <string name="view_navigation_open">Открыть</string>
+    <string name="view_navigation_close">Закрыть</string>
+
+    <string name="menu_notes_item_todo">Сделать</string>
+    <string name="menu_notes_item_ideas">Идеи</string>
+    <string name="menu_notes_item_birthdays">Дни рождения</string>
+    <string name="menu_notes_item_different">Разное</string>
+    <string name="menu_notes_item_mainmenu">Главное меню</string>
+
+    <string name="menu_events_item_today">Сегодня</string>
+    <string name="menu_events_item_thismonth">Этот месяц</string>
+    <string name="menu_events_item_all_events">Все события</string>
+    <string name="menu_events_item_mainmenu">Главное меню</string>
+    <string name="menu_events_item">События</string>
+
+    <string name="deletedialog_title">Удалить?</string>
+    <string name="deletedialog_message">Вы действительно хотите удалить?</string>
+    <string name="deletedialog_positivebutton">Да</string>
+    <string name="deletedialog_negativebutton">Нет</string>
+
+    <string name="savedialog_title">Сохранить изменения?</string>
+    <string name="savedialog_message">Вы хотите сохранить изменения?</string>
+    <string name="savedialog_positivebutton">Да</string>
+    <string name="savedialog_negativebutton">Нет</string>
+    <string name="savedialog_neutralbutton">Отмена</string>
+
+    <string name="quitdialog_title">Выйти?</string>
+    <string name="quitdialog_message">Вы действительно хотите выйти?</string>
+    <string name="quitdialog_positivebutton">Да</string>
+    <string name="quitdialog_negativebutton">Нет</string>
+
+    <string name="toolbartitle_birthday">ДЕНЬ РОЖДЕНИЯ</string>
+    <string name="toolbartitle_different">РАЗНОЕ</string>
+    <string name="toolbartitle_idea">ИДЕЯ</string>
+    <string name="toolbartitle_todo">СДЕЛАТЬ</string>
+    <string name="toolbartitle_event">СОБЫТИЕ</string>
+
+    <string name="toast_nointernet">Нет интернета</string>
+
+    <string name="todoitem_done">ВЫПОЛНЕНО</string>
+
+    <string name="fab_newevent">Событие</string>
+    <string name="fab_quit">Выйти</string>
+    <string name="fab_newtodo">Сделать</string>
+    <string name="fab_newidea">Идея</string>
+    <string name="fab_newbirthday">День рождения</string>
+    <string name="fab_newdifferent">Разное</string>
+
+    <string name="january">января</string>
+
+    <string name="edititem_title">Заголовок</string>
+    <string name="edititem_hint_eventtitle">Заголовок события</string>
+    <string name="edititem_date">Дата</string>
+    <string name="edititem_hint_event_date">Дата события</string>
+    <string name="edititem_hint_description_of_event">Описание события</string>
+    <string name="edititem_name">Имя</string>
+    <string name="edititem_hint_name">Имя</string>
+    <string name="edititem_hint_birthdaydate">Дата</string>
+    <string name="edititem_hint_note_title">Заголовок заметки</string>
+    <string name="edititem_hint_type_your_note">Напишите Вашу заметку...</string>
+    <string name="edititem_hint_type_your_idea">Напишите Вашу идею...</string>
+    <string name="edititem_hint_todo_date">Дата</string>
+    <string name="edititem_hint_description">Описание</string>
+
+    <string name="itemmarker_event">СОБЫТИЕ</string>
+    <string name="itemmarker_birthdays">Дни рождения</string>
+    <string name="itemmarker_different">Разное</string>
+    <string name="itemmarker_ideas">Идеи</string>
+    <string name="itemmarker_todo">Сделать</string>
+
+    <string name="mainmenuitem_notes">Заметки</string>
+    <string name="mainmenuitem_events">События</string>
+    <string name="mainmenuitem_upgrade">Улучшить</string>
+    <string name="mainmenuitem_more_apps">Другие приложения</string>
+    <string name="mainmenuitem_quit">Выйти</string>
+
+    <string name="itemmenu_save">Сохранить</string>
+    <string name="itemmenu_delete">Удалить</string>
+    <string name="itemmenu_calendar">Календарь</string>
+
+    <string name="cardmenu_update">обновить</string>
+    <string name="cardmenu_delete">удалить</string>
+
+</resources>

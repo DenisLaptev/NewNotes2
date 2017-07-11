@@ -59,10 +59,27 @@
 
 
     <style name="NavigationViewStyle">
-       <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:listPreferredItemHeightSmall">40dp</item>
         <item name="android:textColor">@color/colorTextDark</item>
 
     </style>
 
+
+    <style name="toolbar_title_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="toolbar_notesevents_title_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+
+    <style name="tabbar_text_style">
+        <item name="android:textColor">@color/color_white</item>
+    </style>
 </resources>

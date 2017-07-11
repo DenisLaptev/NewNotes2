@@ -1,184 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundMain"
+    android:background="@color/mainBackground"
     android:clickable="true"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    android:paddingLeft="36sp"
-    android:paddingRight="36sp"
-    android:paddingTop="36sp">
+    android:orientation="vertical">
+<!--android:paddingBottom="@dimen/activity_vertical_margin"-->
+
+    <include layout="@layout/toolbar_idea" />
+
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_height="0dp"
+        android:layout_marginBottom="12dp"
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_lightbulb_on" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1">
 
-        <TextView
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_idea"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="bottom|center"
-            android:text="IDEAS"
-            android:textColor="@color/color_marker_ideas"
-            android:textSize="70sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/custom_et_background"
+                android:isScrollContainer="true"
+                android:windowSoftInputMode="adjustPan">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/note_CreateNoteIdeas_datetime_relative_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/note_tvCreateNoteIdeasDate"
+                            style="@style/DateTimeTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Date"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="25sp"/>
+
+                        <TextView
+                            android:id="@+id/note_tvCreateNoteIdeasTime"
+                            style="@style/DateTimeTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="Time"
+                            android:layout_alignParentRight="true"
+                            android:textSize="25sp"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+
+
+                    <LinearLayout
+                        android:id="@+id/ideas_title_linear_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edititem_title"
+                            android:textSize="25sp"/>
+
+                        <LinearLayout
+                            android:layout_width="0px"
+                            android:layout_height="0px"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true" />
+
+                        <EditText
+                            android:id="@+id/note_etCreateNoteIdeasTitle"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/edititem_hint_note_title"
+                            android:textSize="25sp"/>
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <EditText
+                        android:id="@+id/et_note_ideas_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:autoLink="all"
+                        android:background="@null"
+                        android:hint="@string/edititem_hint_type_your_idea"
+                        android:inputType="textNoSuggestions|textMultiLine"
+                        android:linksClickable="true"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+
+            </ScrollView>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/note_CreateNoteIdeas_datetime_relative_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <TextView
-            android:id="@+id/note_tvCreateNoteIdeasDate"
-            style="@style/DateTimeTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="Date"
-            android:layout_alignParentLeft="true"
-            android:textSize="40sp"/>
-
-        <TextView
-            android:id="@+id/note_tvCreateNoteIdeasTime"
-            style="@style/DateTimeTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Time"
-            android:layout_alignParentRight="true"
-            android:textSize="40sp"/>
-    </RelativeLayout>
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <LinearLayout
-        android:id="@+id/note_CreateNoteIdeas_title_linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/ItemTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Title:"
-            android:textSize="40sp"/>
-
-
-        <EditText
-            android:id="@+id/note_etCreateNoteIdeasTitle"
-            style="@style/UserDataTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Note Title"
-            android:textSize="40sp"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Type Your Note:"
-        style="@style/ItemTextStyle"
-        android:textSize="40sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="15dp" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:background="@drawable/custom_et_background"
-        android:windowSoftInputMode="adjustPan"
-        android:isScrollContainer="true"
-        >
-
-        <EditText
-            android:id="@+id/et_note_ideas_description"
-            android:inputType="textNoSuggestions|textMultiLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoLink="all"
-            android:hint="enter some text"
-            android:linksClickable="true"
-            android:textSize="40sp"
-            android:background="@null"
-            android:layout_margin="12dp" />
-
-    </ScrollView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <LinearLayout
-        android:id="@+id/event_buttons_linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/note_btnCreateNoteIdeasSave"
-            style="@style/ButtonsTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Save"
-            android:textSize="20sp"/>
-
-        <Button
-            android:id="@+id/note_btnCreateNoteIdeasNotesMenu"
-            style="@style/ButtonsTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="BACK"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
 
     <!--admob-->
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:gravity="center_horizontal|bottom">
         <!--admob-->
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_home_footer">
-        </com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/banner_home_footer"></com.google.android.gms.ads.AdView>
     </LinearLayout>
+
+
 </LinearLayout>

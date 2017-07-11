@@ -53,7 +53,7 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Name "
+                            android:text="@string/edititem_name"
                             android:textSize="25sp"/>
 
                         <LinearLayout
@@ -67,7 +67,7 @@
                             android:background="@android:color/transparent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Name"
+                            android:hint="@string/edititem_hint_name"
                             android:textSize="25sp"/>
                     </LinearLayout>
 
@@ -83,14 +83,14 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Date "
+                            android:text="@string/edititem_date"
                             android:textSize="25sp"/>
 
                         <TextView
                             android:id="@+id/tv_birthday_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Date"
+                            android:hint="@string/edititem_hint_birthdaydate"
                             android:textSize="25sp" />
 
                         <ImageView

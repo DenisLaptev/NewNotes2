@@ -1,127 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundMain"
+    xmlns:app="http://schemas.android.com/tools"
+    android:background="@color/mainBackground"
     android:clickable="true"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    android:paddingLeft="36sp"
-    android:paddingRight="36sp"
-    android:paddingTop="36sp">
+    android:orientation="vertical">
+<!--android:paddingBottom="@dimen/activity_vertical_margin"-->
+
+    <include layout="@layout/toolbar_birthday" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_height="0dp"
+        android:layout_weight="1"
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_cake_variant" />
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom|center"
-            android:text="BIRTHDAYS"
-            android:textColor="@color/color_marker_birthdays"
-            android:textSize="70sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-
-
-        <EditText
-            android:id="@+id/et_name"
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_birthday"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:hint="Name"
-            android:textColor="@color/color_marker_birthdays"
-            android:textSize="60sp" />
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/custom_et_background"
+                android:isScrollContainer="true"
+                android:windowSoftInputMode="adjustPan">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <LinearLayout
+                        android:id="@+id/birthday_name_linear_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edititem_name"
+                            android:textSize="25sp"/>
+
+                        <LinearLayout
+                            android:layout_width="0px"
+                            android:layout_height="0px"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true" />
+
+                        <EditText
+                            android:id="@+id/et_name"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/edititem_hint_name"
+                            android:textSize="25sp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edititem_date"
+                            android:textSize="25sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_birthday_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/edititem_hint_birthdaydate"
+                            android:textSize="25sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_date_picker"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@color/color_marker_birthdays"
+                            android:clickable="true"
+                            android:src="@drawable/ic_calendar_clock_white" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <Button
-        android:id="@+id/btn_date_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose Date"
-        android:layout_gravity="center"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:id="@+id/tv_birthday_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:hint="Birthdays Date"
-        android:textColor="@color/color_item_activity_date"
-        android:textSize="40sp" />
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_save"
-            style="@style/ButtonsTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Save"
-            android:textSize="30sp"/>
-
-        <Button
-            android:id="@+id/btn_allnotes"
-            style="@style/ButtonsTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="BACK"
-            android:textSize="30sp"/>
-
-    </LinearLayout>
 
     <!--admob-->
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:gravity="center_horizontal|bottom">
         <!--admob-->
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_home_footer">
-        </com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/banner_home_footer"></com.google.android.gms.ads.AdView>
     </LinearLayout>
+
+
+
 </LinearLayout>

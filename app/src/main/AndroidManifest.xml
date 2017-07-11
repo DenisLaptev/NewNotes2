@@ -27,12 +27,6 @@
 
 
         <activity
-            android:name=".activities.StartMenuActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
-        <activity
             android:name=".activities.NotesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
@@ -80,8 +74,6 @@
         <activity
             android:name=".activities.CreateNoteDifferentActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activities.OptionsMenuActivity" />
-        <activity android:name=".activities.AboutActivity"></activity>
 
 
         <!--Include the AdActivity configChanges and theme. -->

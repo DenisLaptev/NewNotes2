@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -101,14 +100,13 @@ public class AllEventsListAdapter extends RecyclerView.Adapter<AllEventsListAdap
                             case delete_item:
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-                                builder.setTitle("Delete?");
-                                builder.setMessage("Do You Really Want To Delete?");
+                                builder.setTitle(R.string.deletedialog_title);
+                                builder.setMessage(R.string.deletedialog_message);
 
                                 //positive button.
-                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(context, "delete", Toast.LENGTH_SHORT).show();
                                         deleteItem(position, eventsDTOList);
                                         notifyItemRemoved(position);
                                     }
@@ -116,7 +114,7 @@ public class AllEventsListAdapter extends RecyclerView.Adapter<AllEventsListAdap
                                 });
 
                                 //negative button.
-                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 

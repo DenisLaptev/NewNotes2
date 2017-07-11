@@ -1,6 +1,14 @@
 <resources>
-    <string name="app_name">NewNotes</string>
-    <string name="toolbar_title">My Business Plan</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-7986696519803132~8675083605</string>
+    <string name="banner_home_footer">ca-app-pub-7986696519803132/1151816806</string>
+    <string name="interstitial_full_screen">ca-app-pub-7986696519803132/2628550005</string>
+    <string name="ads_testdevice_number">9E89078D0DC2D94ADC3D89109C5B6E24</string>
+
+    <string name="billing_pubkey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkm2CrMoOeLISKGMYbslJBdSuWd5v9fYA2jF0bFOCG2RgLuEHMSBHNsOowk6vHF1v+j0LqF4C7BpuxgvvHaQIpt2Ofwk1JP15lAJabTPcbSufzqGGxwKB9VrWwSPEZv9gOKPfN9oBrMLeh6PALRRsWnXELCY1OysAYZUofVWPze2GzvGoJ86EXbE/QvcrR8YGK9R3EvjqYezHVQbVD0w3DVgNoltgH2c4eKOoHX7pVs9xQChYpc+v7a08fjVYgVl9sknGZyU2r97jKZqu9ykuNVAAcCFhJadg7db5W8CPFMNxETc71dC+dCG6gwsSTjEIM42AXq7irru+OGT5ziuwiwIDAQAB</string>
+
+
+    <string name="app_name">Smart Notes</string>
+    <string name="toolbar_title">Smart Notes</string>
 
     <string name="tab_item_different">Different</string>
     <string name="tab_item_ideas">Ideas</string>
@@ -20,34 +28,74 @@
     <string name="menu_events_item_thismonth">This month</string>
     <string name="menu_events_item_all_events">All events</string>
     <string name="menu_events_item_mainmenu">Main menu</string>
-
     <string name="menu_events_item">Events</string>
 
-    <!--<string-array name="Months">
-        <item>01</item>
-        <item>02</item>
-        <item>03</item>
-        <item>04</item>
-        <item>05</item>
-        <item>06</item>
-        <item>07</item>
-        <item>08</item>
-        <item>09</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-    </string-array>-->
+    <string name="deletedialog_title">Delete?</string>
+    <string name="deletedialog_message">Do You Really Want To Delete?</string>
+    <string name="deletedialog_positivebutton">Yes</string>
+    <string name="deletedialog_negativebutton">No</string>
 
+    <string name="savedialog_title">Save Changes?</string>
+    <string name="savedialog_message">Do You Want To Save Changes?</string>
+    <string name="savedialog_positivebutton">Yes</string>
+    <string name="savedialog_negativebutton">No</string>
+    <string name="savedialog_neutralbutton">Cancel</string>
 
+    <string name="quitdialog_title">Quit?</string>
+    <string name="quitdialog_message">Do You Really Want To Quit?</string>
+    <string name="quitdialog_positivebutton">Yes</string>
+    <string name="quitdialog_negativebutton">No</string>
 
+    <string name="toolbartitle_birthday">BIRTHDAY</string>
+    <string name="toolbartitle_different">DIFFERENT</string>
+    <string name="toolbartitle_idea">IDEA</string>
+    <string name="toolbartitle_todo">TODO</string>
+    <string name="toolbartitle_event">EVENT</string>
 
-    <string name="admob_app_id">ca-app-pub-7986696519803132~8675083605</string>
+    <string name="toast_nointernet">No Internet</string>
 
-    <string name="banner_home_footer">ca-app-pub-7986696519803132/1151816806</string>
+    <string name="todoitem_done">DONE</string>
 
-    <string name="interstitial_full_screen">ca-app-pub-7986696519803132/2628550005</string>
+    <string name="fab_newevent">new EVENT</string>
+    <string name="fab_quit">Quit</string>
+    <string name="fab_newtodo">new TODO Note</string>
+    <string name="fab_newidea">new IDEA Note</string>
+    <string name="fab_newbirthday">new BIRTHDAY Note</string>
+    <string name="fab_newdifferent">new DIFFERENT Note</string>
 
+    <string name="january">January</string>
 
-    <string name="billing_pubkey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkm2CrMoOeLISKGMYbslJBdSuWd5v9fYA2jF0bFOCG2RgLuEHMSBHNsOowk6vHF1v+j0LqF4C7BpuxgvvHaQIpt2Ofwk1JP15lAJabTPcbSufzqGGxwKB9VrWwSPEZv9gOKPfN9oBrMLeh6PALRRsWnXELCY1OysAYZUofVWPze2GzvGoJ86EXbE/QvcrR8YGK9R3EvjqYezHVQbVD0w3DVgNoltgH2c4eKOoHX7pVs9xQChYpc+v7a08fjVYgVl9sknGZyU2r97jKZqu9ykuNVAAcCFhJadg7db5W8CPFMNxETc71dC+dCG6gwsSTjEIM42AXq7irru+OGT5ziuwiwIDAQAB</string>
+    <string name="edititem_title">Title </string>
+    <string name="edititem_hint_eventtitle">Event Title</string>
+    <string name="edititem_date">Date </string>
+    <string name="edititem_hint_event_date">Event Date</string>
+    <string name="edititem_hint_description_of_event">Description of Event</string>
+    <string name="edititem_name">Name </string>
+    <string name="edititem_hint_name">Name</string>
+    <string name="edititem_hint_birthdaydate">Date</string>
+    <string name="edititem_hint_note_title">Note Title</string>
+    <string name="edititem_hint_type_your_note">Type your note...</string>
+    <string name="edititem_hint_type_your_idea">Type your idea...</string>
+    <string name="edititem_hint_todo_date">Date</string>
+    <string name="edititem_hint_description">Description</string>
+
+    <string name="itemmarker_event">EVENT</string>
+    <string name="itemmarker_birthdays">Birthdays</string>
+    <string name="itemmarker_different">Different</string>
+    <string name="itemmarker_ideas">Ideas</string>
+    <string name="itemmarker_todo">Todo</string>
+
+    <string name="mainmenuitem_notes">Notes</string>
+    <string name="mainmenuitem_events">Events</string>
+    <string name="mainmenuitem_upgrade">Upgrade</string>
+    <string name="mainmenuitem_more_apps">More Apps</string>
+    <string name="mainmenuitem_quit">Quit</string>
+
+    <string name="itemmenu_save">Save</string>
+    <string name="itemmenu_delete">Delete</string>
+    <string name="itemmenu_calendar">Calendar</string>
+
+    <string name="cardmenu_delete">delete</string>
+    <string name="cardmenu_update">update</string>
 
 </resources>

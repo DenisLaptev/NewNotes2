@@ -67,6 +67,7 @@ public class BirthdayDTO implements Serializable {
         switch (month){
             case 0:
                 stringMonth = "января";
+                
                 break;
 
             case 1:

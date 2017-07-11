@@ -62,7 +62,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:text="Date"
-                            android:textSize="25sp"/>
+                            android:textSize="22sp"/>
 
                         <TextView
                             android:id="@+id/note_tvCreateNoteDifferentTime"
@@ -72,7 +72,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:text="Time"
-                            android:textSize="25sp"/>
+                            android:textSize="22sp"/>
                     </RelativeLayout>
 
                     <TextView
@@ -89,7 +89,7 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Title "
+                            android:text="@string/edititem_title"
                             android:textSize="25sp"/>
 
 
@@ -97,7 +97,7 @@
                             android:id="@+id/et_diff_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Note Title"
+                            android:hint="@string/edititem_hint_note_title"
                             android:textSize="25sp"
                             android:background="@android:color/transparent"/>
 
@@ -114,7 +114,7 @@
 
                         android:autoLink="all"
                         android:background="@null"
-                        android:hint="Type your note..."
+                        android:hint="@string/edititem_hint_type_your_note"
                         android:inputType="textNoSuggestions|textMultiLine"
                         android:linksClickable="true"
                         android:textSize="25sp" />

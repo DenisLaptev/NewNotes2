@@ -80,7 +80,9 @@
                     fab:fab_colorPressed="@color/colorPrimaryDark"
                     fab:fab_icon="@drawable/ic_pillar_white"
                     fab:fab_size="normal"
-                    fab:fab_title="EVENT" />
+                    fab:fab_title="@string/fab_newevent"
+                     />
+                <!---->
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_events_quit"
@@ -89,7 +91,9 @@
                     fab:fab_colorNormal="@color/colorPrimaryDark"
                     fab:fab_colorPressed="@color/colorPrimaryDark"
                     fab:fab_icon="@drawable/ic_run"
-                    fab:fab_title="Quit" />
+                    fab:fab_title="Quit"
+                     />
+                <!---->
 
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

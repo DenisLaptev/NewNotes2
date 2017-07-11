@@ -17,7 +17,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -84,7 +83,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
     public void onBindViewHolder(final TodoListAdapter.TodoViewHolder holder, final int position) {
         final TodoDTO item = todoDTOList.get(position);
         holder.tvTitle.setText(item.getTitle());
-        holder.chbxTodo.setText("ВЫПОЛНЕНО");
+        holder.chbxTodo.setText(R.string.todoitem_done);
         if(item.getIsDone()==0){
             holder.chbxTodo.setChecked(false);
         }else{
@@ -123,11 +122,11 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
                         switch (it.getItemId()) {
                             case delete_item:
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-                                builder.setTitle("Delete?");
-                                builder.setMessage("Do You Really Want To Delete?");
+                                builder.setTitle(R.string.deletedialog_title);
+                                builder.setMessage(R.string.deletedialog_message);
 
                                 //positive button.
-                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         deleteItem(position, todoDTOList);
@@ -137,7 +136,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
                                 });
 
                                 //negative button.
-                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 

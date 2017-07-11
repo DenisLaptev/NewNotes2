@@ -40,7 +40,8 @@ import ua.a5.newnotes.util.IabResult;
 import ua.a5.newnotes.util.Inventory;
 import ua.a5.newnotes.util.Purchase;
 
-import static ua.a5.newnotes.activities.StartMenuActivity.mGoogleApiClient;
+
+import static ua.a5.newnotes.activities.NotesActivity.mGoogleApiClient;
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getCurrentDay;
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getCurrentMonth;
 import static ua.a5.newnotes.utils.utils_spannable_string.UtilsDates.getCurrentYear;
@@ -116,6 +117,7 @@ public class EventsActivity extends AppCompatActivity implements
     private void initToolbar() {
         toolbarEvents = (Toolbar) findViewById(R.id.toolbar_events);
         toolbarEvents.setTitle(R.string.toolbar_title);
+        toolbarEvents.setTitleTextAppearance(this,R.style.toolbar_notesevents_title_style);
         toolbarEvents.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -179,8 +181,6 @@ public class EventsActivity extends AppCompatActivity implements
                         break;
 
                     case R.id.main_menu_events_upgrade:
-                        Toast.makeText(getApplicationContext(), "Upgrade",
-                                Toast.LENGTH_SHORT).show();
 
                         isOnLine = isOnline();
 
@@ -194,7 +194,7 @@ public class EventsActivity extends AppCompatActivity implements
                             }
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "No Internet",
+                            Toast.makeText(getApplicationContext(), R.string.toast_nointernet,
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -209,18 +209,18 @@ public class EventsActivity extends AppCompatActivity implements
                             startActivity(i);
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "No Internet",
+                            Toast.makeText(getApplicationContext(), R.string.toast_nointernet,
                                     Toast.LENGTH_SHORT).show();
                         }
                         break;
 
                     case R.id.main_menu_events_quit:
                         AlertDialog.Builder builder = new AlertDialog.Builder(EventsActivity.this, R.style.MyAlertDialogStyle);
-                        builder.setTitle("Quit?");
-                        builder.setMessage("Do You Really Want To Quit?");
+                        builder.setTitle(R.string.quitdialog_title);
+                        builder.setMessage(R.string.quitdialog_message);
 
                         //positive button.
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(R.string.quitdialog_positivebutton, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
@@ -229,7 +229,7 @@ public class EventsActivity extends AppCompatActivity implements
                         });
 
                         //negative button.
-                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(R.string.quitdialog_negativebutton, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -283,11 +283,11 @@ public class EventsActivity extends AppCompatActivity implements
         } else {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(EventsActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle("Quit?");
-            builder.setMessage("Do You Really Want To Quit?");
+            builder.setTitle(R.string.quitdialog_title);
+            builder.setMessage(R.string.quitdialog_message);
 
             //positive button.
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.quitdialog_positivebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish();
@@ -296,7 +296,7 @@ public class EventsActivity extends AppCompatActivity implements
             });
 
             //negative button.
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.quitdialog_negativebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 

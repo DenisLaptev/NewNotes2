@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:text="Different"
+            android:text="@string/itemmarker_different"
             android:textColor="@color/color_marker_different"
             android:textSize="20sp"
             android:textStyle="bold" />

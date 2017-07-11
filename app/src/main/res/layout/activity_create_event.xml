@@ -56,7 +56,7 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Title "
+                            android:text="@string/edititem_title"
                             android:textSize="25sp"/>
 
                         <LinearLayout
@@ -69,7 +69,7 @@
                             android:id="@+id/event_etCreateEventTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Event Title"
+                            android:hint="@string/edititem_hint_eventtitle"
                             android:background="@android:color/transparent"
                             android:textSize="25sp"
                             />
@@ -89,14 +89,14 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Deadline "
+                            android:text="@string/edititem_date"
                             android:textSize="25sp"/>
 
                         <TextView
                             android:id="@+id/tv_events_deadline_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Deadline Date"
+                            android:hint="@string/edititem_hint_event_date"
                             android:textSize="25sp" />
 
                         <ImageView
@@ -119,7 +119,7 @@
 
                         android:autoLink="all"
                         android:background="@null"
-                        android:hint="Description of Event"
+                        android:hint="@string/edititem_hint_description_of_event"
                         android:inputType="textNoSuggestions|textMultiLine"
                         android:linksClickable="true"
                         android:textSize="25sp" />

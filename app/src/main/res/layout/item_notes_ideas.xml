@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:text="Ideas"
+            android:text="@string/itemmarker_ideas"
             android:textColor="@color/color_marker_ideas"
             android:textSize="20sp"
             android:textStyle="bold" />

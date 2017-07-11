@@ -134,6 +134,7 @@ public class NotesActivity extends AppCompatActivity implements
     private void initToolbar() {
         toolbarNotes = (Toolbar) findViewById(toolbar_notes);
         toolbarNotes.setTitle(R.string.toolbar_title);
+        toolbarNotes.setTitleTextAppearance(this,R.style.toolbar_notesevents_title_style);
         toolbarNotes.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -197,9 +198,6 @@ public class NotesActivity extends AppCompatActivity implements
                         break;
 
                     case R.id.main_menu_notes_upgrade:
-                        Toast.makeText(getApplicationContext(), "Upgrade",
-                                Toast.LENGTH_SHORT).show();
-
 
                         isOnLine = isOnline();
 
@@ -213,7 +211,7 @@ public class NotesActivity extends AppCompatActivity implements
                             }
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "No Internet",
+                            Toast.makeText(getApplicationContext(), R.string.toast_nointernet,
                                     Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -227,18 +225,18 @@ public class NotesActivity extends AppCompatActivity implements
                             startActivity(i);
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "No Internet",
+                            Toast.makeText(getApplicationContext(), R.string.toast_nointernet,
                                     Toast.LENGTH_SHORT).show();
                         }
                         break;
 
                     case R.id.main_menu_notes_quit:
                         AlertDialog.Builder builder = new AlertDialog.Builder(NotesActivity.this, R.style.MyAlertDialogStyle);
-                        builder.setTitle("Quit?");
-                        builder.setMessage("Do You Really Want To Quit?");
+                        builder.setTitle(R.string.quitdialog_title);
+                        builder.setMessage(R.string.quitdialog_message);
 
                         //positive button.
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(R.string.quitdialog_positivebutton, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
@@ -247,7 +245,7 @@ public class NotesActivity extends AppCompatActivity implements
                         });
 
                         //negative button.
-                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(R.string.quitdialog_negativebutton, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -286,11 +284,11 @@ public class NotesActivity extends AppCompatActivity implements
         } else {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(NotesActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle("Quit?");
-            builder.setMessage("Do You Really Want To Quit?");
+            builder.setTitle(R.string.quitdialog_title);
+            builder.setMessage(R.string.quitdialog_message);
 
             //positive button.
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.quitdialog_positivebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish();
@@ -299,7 +297,7 @@ public class NotesActivity extends AppCompatActivity implements
             });
 
             //negative button.
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.quitdialog_negativebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:text="Birthdays"
+            android:text="@string/itemmarker_birthdays"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/color_marker_birthdays" />

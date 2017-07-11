@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+
+        android:id="@+id/btn_calendar_events"
+        android:title="calendar"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_calendar_clock_white_menu_tablet"
+        app:showAsAction="always" />
+</menu>

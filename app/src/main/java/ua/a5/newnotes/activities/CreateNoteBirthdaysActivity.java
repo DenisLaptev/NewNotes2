@@ -37,7 +37,8 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_MONTH;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_NAME;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_YEAR;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_NAME;
-import static ua.a5.newnotes.activities.OptionsMenuActivity.mIsPremium;
+
+import static ua.a5.newnotes.activities.NotesActivity.mIsPremium;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_BIRTHDAYS;
 import static ua.a5.newnotes.utils.Constants.LOG_TAG;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
@@ -86,7 +87,9 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_note_birthdays);
 
         toolbarBirthday = (Toolbar) findViewById(R.id.toolbar_birthday);
-        toolbarBirthday.setTitle("BIRTHDAY");
+        toolbarBirthday.setTitle(R.string.toolbartitle_birthday);
+        toolbarBirthday.setTitleTextAppearance(this,R.style.toolbar_title_style);
+        toolbarBirthday.setOverflowIcon(getResources().getDrawable(R.drawable.ic_dots_vertical));
         setSupportActionBar(toolbarBirthday);
 
         if (mIsPremium == false) {
@@ -99,7 +102,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
             AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                     // Check the LogCat to get your test device ID
-                    .addTestDevice("9E89078D0DC2D94ADC3D89109C5B6E24")
+                    .addTestDevice(getString(R.string.ads_testdevice_number))
                     .build();
             mAdView.loadAd(adRequest);
             //для баннера////////////////////////////////////////////////////
@@ -249,11 +252,11 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
 
             case R.id.menu_birthday_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteBirthdaysActivity.this, R.style.MyAlertDialogStyle);
-                builder.setTitle("Delete?");
-                builder.setMessage("Do You Really Want To Delete?");
+                builder.setTitle(R.string.deletedialog_title);
+                builder.setMessage(R.string.deletedialog_message);
 
                 //positive button.
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deleteItemFromTable(birthdayDTO);
@@ -263,7 +266,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
                 });
 
                 //negative button.
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -363,11 +366,11 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
 
         if (!isSavedFlagBirthday) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteBirthdaysActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle("Save Changes?");
-            builder.setMessage("Do You Want To Save Changes?");
+            builder.setTitle(R.string.savedialog_title);
+            builder.setMessage(R.string.savedialog_message);
 
             //positive button.
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -424,7 +427,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
             });
 
             //negative button.
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     isCardForUpdate = false;
@@ -433,7 +436,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
             });
 
             //negative button.
-            builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 

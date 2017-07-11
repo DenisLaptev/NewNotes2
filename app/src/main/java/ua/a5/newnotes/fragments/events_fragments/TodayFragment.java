@@ -111,7 +111,7 @@ public class TodayFragment extends AbstractTabFragment implements TodayEventsLis
 
 
         FloatingActionButton actionEvent = (FloatingActionButton) getActivity().findViewById(R.id.action_event);
-        actionEvent.setTitle("new EVENT");
+        actionEvent.setTitle(getString(R.string.fab_newevent));
         actionEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +123,7 @@ public class TodayFragment extends AbstractTabFragment implements TodayEventsLis
 
 
         FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_events_quit);
-        actionMainmenu.setTitle("Quit");
+        actionMainmenu.setTitle(getString(R.string.fab_quit));
         actionMainmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

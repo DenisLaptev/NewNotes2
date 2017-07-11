@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by A5 Android Intern 2 on 15.05.2017.
  */
 
-public class EventDTO implements Serializable {
+public class EventDTO  implements Serializable{
     private String title;
     private String description;
     private int day;

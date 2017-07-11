@@ -61,7 +61,7 @@
                             android:layout_alignParentStart="true"
                             android:text="Date"
                             android:layout_alignParentLeft="true"
-                            android:textSize="25sp"/>
+                            android:textSize="22sp"/>
 
                         <TextView
                             android:id="@+id/note_tvCreateNoteIdeasTime"
@@ -71,7 +71,7 @@
                             android:layout_alignParentEnd="true"
                             android:text="Time"
                             android:layout_alignParentRight="true"
-                            android:textSize="25sp"/>
+                            android:textSize="22sp"/>
                     </RelativeLayout>
 
                     <TextView
@@ -90,7 +90,7 @@
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Title "
+                            android:text="@string/edititem_title"
                             android:textSize="25sp"/>
 
                         <LinearLayout
@@ -104,7 +104,7 @@
                             android:background="@android:color/transparent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Note Title"
+                            android:hint="@string/edititem_hint_note_title"
                             android:textSize="25sp"/>
                     </LinearLayout>
 
@@ -120,7 +120,7 @@
 
                         android:autoLink="all"
                         android:background="@null"
-                        android:hint="Type your idea..."
+                        android:hint="@string/edititem_hint_type_your_idea"
                         android:inputType="textNoSuggestions|textMultiLine"
                         android:linksClickable="true"
                         android:textSize="25sp" />

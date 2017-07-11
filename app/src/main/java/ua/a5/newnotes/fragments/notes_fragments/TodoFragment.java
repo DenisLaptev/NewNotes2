@@ -81,7 +81,7 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
         recyclerView.setAdapter(adapter);
 
         FloatingActionButton actionTodo = (FloatingActionButton) getActivity().findViewById(R.id.action_todo);
-        actionTodo.setTitle("new TODO Note");
+        actionTodo.setTitle(getString(R.string.fab_newtodo));
         actionTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +93,7 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
 
 
         FloatingActionButton actionIdea = (FloatingActionButton) getActivity().findViewById(R.id.action_ideas);
-        actionIdea.setTitle("new IDEA Note");
+        actionIdea.setTitle(getString(R.string.fab_newidea));
         actionIdea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +104,7 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
         });
 
         FloatingActionButton actionBirthday = (FloatingActionButton) getActivity().findViewById(R.id.action_birthdays);
-        actionBirthday.setTitle("new BIRTHDAY Note");
+        actionBirthday.setTitle(getString(R.string.fab_newbirthday));
         actionBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +115,7 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
         });
 
         FloatingActionButton actionDifferent = (FloatingActionButton) getActivity().findViewById(R.id.action_different);
-        actionDifferent.setTitle("new DIFFERENT Note");
+        actionDifferent.setTitle(getString(R.string.fab_newdifferent));
         actionDifferent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +126,7 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
         });
 
         FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_notes_quit);
-        actionMainmenu.setTitle("Quit");
+        actionMainmenu.setTitle(getString(R.string.fab_quit));
         actionMainmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

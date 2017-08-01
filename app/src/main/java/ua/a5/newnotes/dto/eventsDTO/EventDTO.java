@@ -63,60 +63,6 @@ public class EventDTO  implements Serializable{
     }
 
 
-    public String generateStringMonth(int month){
-        String stringMonth = null;
-        switch (month){
-            case 0:
-                stringMonth = "января";
-                break;
-
-            case 1:
-                stringMonth = "февраля";
-                break;
-
-            case 2:
-                stringMonth = "марта";
-                break;
-
-            case 3:
-                stringMonth = "апреля";
-                break;
-
-            case 4:
-                stringMonth = "мая";
-                break;
-
-            case 5:
-                stringMonth = "июня";
-                break;
-
-            case 6:
-                stringMonth = "июля";
-                break;
-
-            case 7:
-                stringMonth = "августа";
-                break;
-
-            case 8:
-                stringMonth = "сентября";
-                break;
-
-            case 9:
-                stringMonth = "октября";
-                break;
-
-            case 10:
-                stringMonth = "ноября";
-                break;
-
-            case 11:
-                stringMonth = "декабря";
-                break;
-        }
-        return stringMonth;
-    }
-
     @Override
     public String toString() {
         return "EventDTO{" +

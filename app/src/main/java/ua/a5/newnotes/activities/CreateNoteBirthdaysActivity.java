@@ -37,7 +37,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_MONTH;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_NAME;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_YEAR;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_NAME;
-
 import static ua.a5.newnotes.activities.NotesActivity.mIsPremium;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_BIRTHDAYS;
 import static ua.a5.newnotes.utils.Constants.LOG_TAG;
@@ -70,6 +69,11 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
     int noteMonth;
     int noteYear;
 
+    //Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+    String oldName;
+    String oldDate;
+
 
     //для баннера////////////////////////////////////////////////////
     protected AdView mAdView;
@@ -88,7 +92,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
 
         toolbarBirthday = (Toolbar) findViewById(R.id.toolbar_birthday);
         toolbarBirthday.setTitle(R.string.toolbartitle_birthday);
-        toolbarBirthday.setTitleTextAppearance(this,R.style.toolbar_title_style);
+        toolbarBirthday.setTitleTextAppearance(this, R.style.toolbar_title_style);
         toolbarBirthday.setOverflowIcon(getResources().getDrawable(R.drawable.ic_dots_vertical));
         setSupportActionBar(toolbarBirthday);
 
@@ -129,7 +133,23 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
         //для работы с БД.
         dbHelper = new DBHelper(this);
 
+        // get the current date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
         etName = (EditText) findViewById(R.id.et_name);
+        dateDisplay = (TextView) findViewById(R.id.tv_birthday_date);
+        // display the current date
+        updateDisplay();
+
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+        oldName = etName.getText().toString();
+        oldDate = dateDisplay.getText().toString();
+
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
         etName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -142,22 +162,12 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
         });
 
 
-        dateDisplay = (TextView) findViewById(R.id.tv_birthday_date);
         ivPickDate = (ImageView) findViewById(R.id.iv_date_picker);
         ivPickDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DATE_DIALOG_ID);
             }
         });
-
-        // get the current date
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        // display the current date
-        updateDisplay();
 
 
         if (isCardForUpdate == true && getIntent() != null) {
@@ -180,7 +190,10 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
                                 .append(birthdayDTO.getMonth() + 1).append("-")
                                 .append(birthdayDTO.getYear()).append(" "));
             }
-
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+            oldName = etName.getText().toString();
+            oldDate = dateDisplay.getText().toString();
         } else {
             birthdayDTO = new BirthdayDTO(
                     new String(""),
@@ -248,6 +261,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
                 dbHelper.close();
 ////////////////////////
                 isSavedFlagBirthday = true;
+                CreateNoteBirthdaysActivity.this.finish();
                 break;
 
             case R.id.menu_birthday_delete:
@@ -363,6 +377,7 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (hasChanges()) {
 
         if (!isSavedFlagBirthday) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteBirthdaysActivity.this, R.style.MyAlertDialogStyle);
@@ -449,6 +464,19 @@ public class CreateNoteBirthdaysActivity extends AppCompatActivity {
             CreateNoteBirthdaysActivity.this.finish();
             super.onBackPressed();
         }
+        } else {
+            CreateNoteBirthdaysActivity.this.finish();
+        }
+    }
+
+    public boolean hasChanges() {
+        boolean hasChanges = false;
+        if (!oldName.equals(etName.getText().toString()) ||
+                !oldDate.equals(dateDisplay.getText().toString())
+                ) {
+            hasChanges = true;
+        }
+        return hasChanges;
     }
 
 

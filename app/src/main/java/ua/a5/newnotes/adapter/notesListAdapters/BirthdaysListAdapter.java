@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,8 +25,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_MONTH;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_NAME;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_KEY_YEAR;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_BIRTHDAYS_NAME;
-import static ua.a5.newnotes.R.id.delete_item;
-import static ua.a5.newnotes.R.id.update_item;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_BIRTHDAYS;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
 
@@ -78,63 +74,132 @@ public class BirthdaysListAdapter extends RecyclerView.Adapter<BirthdaysListAdap
     public void onBindViewHolder(final BirthdaysViewHolder holder, final int position) {
         final BirthdayDTO item = birthdaysDTOList.get(position);
         holder.tvName.setText(item.getName());
-        holder.tvDate.setText(item.getDay() + " " + item.getStringMonth());
+        //holder.tvDate.setText(item.getDay() + " " + item.getStringMonth());
+        holder.tvDate.setText(item.getDay() + " " + generateStringMonth(item.getMonth()));
         holder.ivPictureBirthdayMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //deleteItem(position, birthdaysDTOList);
-
-                PopupMenu cardPopupMenu = new PopupMenu(context, holder.ivPictureBirthdayMenu);
-                cardPopupMenu.getMenuInflater().inflate(R.menu.menu_card, cardPopupMenu.getMenu());
-
-                cardPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem it) {
-
-                        switch (it.getItemId()) {
-                            case delete_item:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-                                builder.setTitle(R.string.deletedialog_title);
-                                builder.setMessage(R.string.deletedialog_message);
-
-                                //positive button.
-                                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                        deleteItem(position, birthdaysDTOList);
-
-                                        notifyItemRemoved(position);
-                                    }
-
-                                });
-
-                                //negative button.
-                                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-
-                                });
-                                builder.show();
-                                break;
-
-                            case update_item:
-                                isCardForUpdate = true;
-                                Intent intent = new Intent(context, CreateNoteBirthdaysActivity.class);
-                                intent.putExtra(KEY_UPDATE_BIRTHDAYS, item);
-                                context.startActivity(intent);
-                                break;
-                        }
-                        return true;
-                    }
-                });
-                cardPopupMenu.show();
+                isCardForUpdate = true;
+                Intent intent = new Intent(context, CreateNoteBirthdaysActivity.class);
+                intent.putExtra(KEY_UPDATE_BIRTHDAYS, item);
+                context.startActivity(intent);
             }
         });
-    }
 
+
+        holder.ivPictureBirthdayMenuDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.deletedialog_title);
+                builder.setMessage(R.string.deletedialog_message);
+
+                //positive button.
+                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        deleteItem(position, birthdaysDTOList);
+
+                        notifyItemRemoved(position);
+                    }
+
+                });
+
+                //negative button.
+                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+
+                });
+                builder.show();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+    public String generateStringMonth(int month){
+        String stringMonth = null;
+        switch (month){
+            case 0:
+                //stringMonth = "января";
+                stringMonth = context.getResources().getString(R.string.january);
+                break;
+
+            case 1:
+                //stringMonth = "февраля";
+                stringMonth = context.getResources().getString(R.string.february);
+                break;
+
+            case 2:
+                //stringMonth = "марта";
+                stringMonth = context.getResources().getString(R.string.march);
+                break;
+
+            case 3:
+                //stringMonth = "апреля";
+                stringMonth = context.getResources().getString(R.string.april);
+                break;
+
+            case 4:
+                //stringMonth = "мая";
+                stringMonth = context.getResources().getString(R.string.may);
+                break;
+
+            case 5:
+                //stringMonth = "июня";
+                stringMonth = context.getResources().getString(R.string.june);
+                break;
+
+            case 6:
+                //stringMonth = "июля";
+                stringMonth = context.getResources().getString(R.string.july);
+                break;
+
+            case 7:
+                //stringMonth = "августа";
+                stringMonth = context.getResources().getString(R.string.august);
+                break;
+
+            case 8:
+                //stringMonth = "сентября";
+                stringMonth = context.getResources().getString(R.string.september);
+                break;
+
+            case 9:
+                //stringMonth = "октября";
+                stringMonth = context.getResources().getString(R.string.october);
+                break;
+
+            case 10:
+                //stringMonth = "ноября";
+                stringMonth = context.getResources().getString(R.string.november);
+                break;
+
+            case 11:
+                //stringMonth = "декабря";
+                stringMonth = context.getResources().getString(R.string.december);
+                break;
+        }
+        return stringMonth;
+    }
 
     private void deleteItem(int position, List<BirthdayDTO> birthdaysDTOList) {
         int currentPosition = position;
@@ -181,6 +246,7 @@ public class BirthdaysListAdapter extends RecyclerView.Adapter<BirthdaysListAdap
         TextView tvName;
         TextView tvDate;
         ImageView ivPictureBirthdayMenu;
+        ImageView ivPictureBirthdayMenuDelete;
 
         ItemClickListener itemClickListener;
 
@@ -191,6 +257,7 @@ public class BirthdaysListAdapter extends RecyclerView.Adapter<BirthdaysListAdap
             tvName = (TextView) itemView.findViewById(R.id.title_birthdays);
             tvDate = (TextView) itemView.findViewById(R.id.tv_date_birthdays);
             ivPictureBirthdayMenu = (ImageView) itemView.findViewById(R.id.birthdays_card_menu);
+            ivPictureBirthdayMenuDelete = (ImageView) itemView.findViewById(R.id.birthdays_card_menu_delete);
 
             this.itemClickListener = itemClickListener;
 

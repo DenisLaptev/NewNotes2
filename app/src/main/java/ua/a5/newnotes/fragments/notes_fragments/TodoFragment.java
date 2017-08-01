@@ -124,7 +124,7 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
                 startActivity(intent);
             }
         });
-
+/*
         FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_notes_quit);
         actionMainmenu.setTitle(getString(R.string.fab_quit));
         actionMainmenu.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +133,7 @@ public class TodoFragment extends AbstractTabFragment implements TodoListAdapter
                 getActivity().onBackPressed();
             }
         });
+*/
 
 
 

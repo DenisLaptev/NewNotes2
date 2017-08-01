@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,8 +26,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_KEY_BEGIN_YEAR;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_KEY_DESCRIPTION;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_NAME;
-import static ua.a5.newnotes.R.id.delete_item;
-import static ua.a5.newnotes.R.id.update_item;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_EVENTS;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
 
@@ -93,55 +89,40 @@ public class TodayEventsListAdapter extends RecyclerView.Adapter<TodayEventsList
             @Override
             public void onClick(View v) {
 
-                //deleteItem(position, eventsDTOList);
+                isCardForUpdate = true;
+                Intent intent = new Intent(context, CreateEventActivity.class);
+                intent.putExtra(KEY_UPDATE_EVENTS, item);
+                context.startActivity(intent);
+                notifyDataSetChanged();
+            }
+        });
 
-                PopupMenu cardPopupMenu = new PopupMenu(context, holder.ivPictureEventMenu);
-                cardPopupMenu.getMenuInflater().inflate(R.menu.menu_card, cardPopupMenu.getMenu());
+        holder.ivPictureEventMenuDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.deletedialog_title);
+                builder.setMessage(R.string.deletedialog_message);
 
-                cardPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                //positive button.
+                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem it) {
-
-                        switch (it.getItemId()) {
-                            case delete_item:
-
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-                                builder.setTitle(R.string.deletedialog_title);
-                                builder.setMessage(R.string.deletedialog_message);
-
-                                //positive button.
-                                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        deleteItem(position, eventsDTOList);
-                                        notifyItemRemoved(position);
-                                    }
-
-                                });
-
-                                //negative button.
-                                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-
-                                });
-                                builder.show();
-                                break;
-
-                            case update_item:
-                                isCardForUpdate = true;
-                                Intent intent = new Intent(context, CreateEventActivity.class);
-                                intent.putExtra(KEY_UPDATE_EVENTS, item);
-                                context.startActivity(intent);
-                                notifyDataSetChanged();
-                                break;
-                        }
-                        return true;
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteItem(position, eventsDTOList);
+                        notifyItemRemoved(position);
                     }
+
                 });
-                cardPopupMenu.show();
+
+                //negative button.
+                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+
+                });
+                builder.show();
             }
         });
     }
@@ -196,6 +177,7 @@ public class TodayEventsListAdapter extends RecyclerView.Adapter<TodayEventsList
         TextView tvDescription;
         TextView tvDate;
         ImageView ivPictureEventMenu;
+        ImageView ivPictureEventMenuDelete;
 
         ItemClickListener itemClickListener;
 
@@ -207,6 +189,7 @@ public class TodayEventsListAdapter extends RecyclerView.Adapter<TodayEventsList
             tvDescription = (TextView) itemView.findViewById(R.id.tv_description_events_today);
             tvDate = (TextView) itemView.findViewById(R.id.tv_date_events_today);
             ivPictureEventMenu = (ImageView) itemView.findViewById(R.id.event_card_menu);
+            ivPictureEventMenuDelete = (ImageView) itemView.findViewById(R.id.event_card_menu_delete);
 
             this.itemClickListener = itemClickListener;
 

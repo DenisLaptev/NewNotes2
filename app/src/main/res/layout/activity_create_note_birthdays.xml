@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/tools"
     android:background="@color/mainBackground"
     android:clickable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
-<!--android:paddingBottom="@dimen/activity_vertical_margin"-->
+    <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
 
     <include layout="@layout/toolbar_birthday" />
 
@@ -16,12 +16,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-
         android:layout_marginBottom="12dp"
+
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp">
+        android:layout_marginTop="12dp"
+        android:layout_weight="1">
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_view_birthday"
@@ -44,11 +44,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <LinearLayout
                         android:id="@+id/birthday_name_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+                        <!--
                         <TextView
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
@@ -56,6 +58,13 @@
                             android:text="@string/edititem_name"
                             android:textSize="25sp"/>
 
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
+                            android:textSize="25sp"/>
+-->
                         <LinearLayout
                             android:layout_width="0px"
                             android:layout_height="0px"
@@ -63,12 +72,13 @@
                             android:focusableInTouchMode="true" />
 
                         <EditText
+                            style="@style/ItemTextStyle"
                             android:id="@+id/et_name"
-                            android:background="@android:color/transparent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
                             android:hint="@string/edititem_hint_name"
-                            android:textSize="25sp"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <TextView
@@ -79,29 +89,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/edititem_date"
-                            android:textSize="25sp"/>
+                            android:textSize="16sp" />
+
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tv_birthday_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/edititem_hint_birthdaydate"
-                            android:textSize="25sp" />
+                            android:textColor="@color/color_black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
+                            android:textSize="16sp" />
 
                         <ImageView
                             android:id="@+id/iv_date_picker"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:background="@color/color_marker_birthdays"
                             android:clickable="true"
-                            android:src="@drawable/ic_calendar_clock_white" />
+                            android:src="@drawable/ic_calendar_clock_white"
+                            android:layout_gravity="center"/>
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -130,7 +156,6 @@
             ads:adSize="BANNER"
             ads:adUnitId="@string/banner_home_footer"></com.google.android.gms.ads.AdView>
     </LinearLayout>
-
 
 
 </LinearLayout>

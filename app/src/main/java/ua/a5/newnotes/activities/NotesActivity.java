@@ -77,7 +77,7 @@ public class NotesActivity extends AppCompatActivity implements
 
     // Does the user have the premium upgrade?
     public static boolean mIsPremium = false;
-    //For billing.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +85,6 @@ public class NotesActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
 
-
-        //Create the Google Api Client with access to the Play Game and Drive services.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Plus.API, Plus.PlusOptions.builder().build())
-                .addScope(Plus.SCOPE_PLUS_LOGIN)
-                //.addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                .addApi(Drive.API).addScope(Drive.SCOPE_APPFOLDER) // Drive API
-                .build();
-        //For billing
-
-        mGoogleApiClient.connect();
 
         base64EncodedPublicKey = getString(R.string.billing_pubkey);
 
@@ -127,6 +114,21 @@ public class NotesActivity extends AppCompatActivity implements
 //При первом запуске делаем шторку открытой, чтоб пользоваетль знал, что она есть.
             drawerLayoutNotes.openDrawer(GravityCompat.START);
             flagIsShowMenuWhenAppIsOpenedFirstTime = false;
+
+//Привязываем аккаунт пользователя к приложению, когда он заходит первый раз.
+            //For billing.
+            //Create the Google Api Client with access to the Play Game and Drive services.
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(Plus.API, Plus.PlusOptions.builder().build())
+                    .addScope(Plus.SCOPE_PLUS_LOGIN)
+                    //.addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                    .addApi(Drive.API).addScope(Drive.SCOPE_APPFOLDER) // Drive API
+                    .build();
+//For billing
+
+            mGoogleApiClient.connect();
         }
     }
 

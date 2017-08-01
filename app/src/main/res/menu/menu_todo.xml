@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools">
     <item
         android:id="@+id/menu_todo_save"
         android:orderInCategory="2"
-        android:title="@string/itemmenu_save">
+        android:title="@string/itemmenu_save"
+        android:icon="@drawable/cast_ic_expanded_controller_play">
     </item>
     <item
         android:id="@+id/menu_todo_delete"
         android:orderInCategory="3"
-        android:title="@string/itemmenu_delete">
+        android:title="@string/itemmenu_delete"
+        android:icon="@drawable/cast_ic_expanded_controller_mute">
     </item>
 
 

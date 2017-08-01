@@ -33,4 +33,5 @@
         android:icon="@drawable/ic_run_black"
         android:orderInCategory="1"
         android:title="@string/mainmenuitem_quit" />
+
 </menu>

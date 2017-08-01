@@ -52,13 +52,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+<!--
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edititem_title"
+                            android:textSize="25sp"/>
 
                         <TextView
                             style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/edititem_title"
+                            android:text="  "
                             android:textSize="25sp"/>
+-->
 
                         <LinearLayout
                             android:layout_width="0px"
@@ -67,12 +74,14 @@
                             android:focusableInTouchMode="true" />
 
                         <EditText
+                            style="@style/ItemTextStyle"
                             android:id="@+id/note_etCreateNoteTODOTitle"
                             android:background="@android:color/transparent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/edititem_hint_note_title"
-                            android:textSize="25sp"/>
+                            android:textSize="16sp"
+                            />
                     </LinearLayout>
 
                     <TextView
@@ -89,22 +98,39 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/edititem_date"
-                            android:textSize="25sp"/>
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/tv_todo_deadline_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/edititem_hint_todo_date"
-                            android:textSize="25sp"/>
+                            android:textSize="16sp"
+                            android:textColor="@color/color_black"
+                            />
+
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
+                            android:textSize="16sp"/>
 
                         <ImageView
                             android:id="@+id/iv_todo_calendar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:background="@color/color_marker_todo"
                             android:clickable="true"
-                            android:src="@drawable/ic_calendar_clock_white" />
+                            android:src="@drawable/ic_calendar_clock_white"
+                            android:layout_gravity="center"/>
                     </LinearLayout>
 
                     <TextView
@@ -120,7 +146,8 @@
                         android:hint="@string/edititem_hint_description"
                         android:inputType="textNoSuggestions|textMultiLine"
                         android:linksClickable="true"
-                        android:textSize="25sp" />
+                        android:textSize="16sp"
+                        />
 
 
                 </LinearLayout>

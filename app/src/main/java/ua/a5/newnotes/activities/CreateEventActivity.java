@@ -61,7 +61,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_KEY_END_MONTH;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_KEY_LOCATION;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_EVENTS_NAME;
-
 import static ua.a5.newnotes.activities.NotesActivity.mIsPremium;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_EVENTS;
 import static ua.a5.newnotes.utils.Constants.LOG_TAG;
@@ -121,6 +120,12 @@ public class CreateEventActivity extends AppCompatActivity {
     String endHour = String.valueOf(getCurrentHour());
     String endMinute = String.valueOf(getCurrentMinute());
 
+    //Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+    String oldTitle;
+    String oldDate;
+    String oldDescription;
+
     //для баннера////////////////////////////////////////////////////
     protected AdView mAdView;
     //для баннера////////////////////////////////////////////////////
@@ -138,10 +143,9 @@ public class CreateEventActivity extends AppCompatActivity {
 
         toolbarEvent = (Toolbar) findViewById(R.id.toolbar_event);
         toolbarEvent.setTitle(R.string.toolbartitle_event);
-        toolbarEvent.setTitleTextAppearance(this,R.style.toolbar_title_style);
+        toolbarEvent.setTitleTextAppearance(this, R.style.toolbar_title_style);
         toolbarEvent.setOverflowIcon(getResources().getDrawable(R.drawable.ic_dots_vertical));
         setSupportActionBar(toolbarEvent);
-
 
 
         if (mIsPremium == false) {
@@ -183,7 +187,26 @@ public class CreateEventActivity extends AppCompatActivity {
         //для работы с БД.
         dbHeper = new DBHelper(this);
 
+        // get the current date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
         etCreateEventTitle = (EditText) findViewById(R.id.event_etCreateEventTitle);
+        tvEventsDeadline = (TextView) findViewById(R.id.tv_events_deadline_date);
+        // display the current date
+        updateDisplay();
+        etEventDescription = (EditText) findViewById(R.id.et_event_description);
+
+
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+        oldTitle = etCreateEventTitle.getText().toString();
+        oldDate = tvEventsDeadline.getText().toString();
+        oldDescription = etEventDescription.getText().toString();
+
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
         etCreateEventTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -203,17 +226,6 @@ public class CreateEventActivity extends AppCompatActivity {
         });
 
 
-        // get the current date
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        tvEventsDeadline = (TextView) findViewById(R.id.tv_events_deadline_date);
-        // display the current date
-        updateDisplay();
-
-        etEventDescription = (EditText) findViewById(R.id.et_event_description);
         etEventDescription.addTextChangedListener(onTextChangedListener());
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
@@ -245,7 +257,11 @@ public class CreateEventActivity extends AppCompatActivity {
                         .append(eventDTO.getMonth() + 1).append("-")
                         .append(eventDTO.getYear()).append(" "));
             }
-
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+            oldTitle = etCreateEventTitle.getText().toString();
+            oldDate = tvEventsDeadline.getText().toString();
+            oldDescription = etEventDescription.getText().toString();
         } else {
             eventDTO = new EventDTO(
                     new String(""),
@@ -391,6 +407,7 @@ public class CreateEventActivity extends AppCompatActivity {
 ////////////////////////
 
                 isSavedFlagEvent = true;
+                CreateEventActivity.this.finish();
                 break;
 
             case R.id.menu_event_delete:
@@ -809,114 +826,128 @@ public class CreateEventActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (hasChanges()) {
 
-        if (!isSavedFlagEvent) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CreateEventActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle(R.string.savedialog_title);
-            builder.setMessage(R.string.savedialog_message);
+            if (!isSavedFlagEvent) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CreateEventActivity.this, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.savedialog_title);
+                builder.setMessage(R.string.savedialog_message);
 
-            //positive button.
-            builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                //positive button.
+                builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                    if (isCardForUpdate == true) {
-                        deleteItemFromTable(eventDTO);
-                    }
-                    isCardForUpdate = false;
+                        if (isCardForUpdate == true) {
+                            deleteItemFromTable(eventDTO);
+                        }
+                        isCardForUpdate = false;
 ////////////////
-                    //заполняем БД данными.
+                        //заполняем БД данными.
 
-                    //класс SQLiteDatabase предназначен для управления БД SQLite.
-                    //если БД не существует, dbHelper вызовет метод onCreate(),
-                    //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
+                        //класс SQLiteDatabase предназначен для управления БД SQLite.
+                        //если БД не существует, dbHelper вызовет метод onCreate(),
+                        //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
 
-                    //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
-                    SQLiteDatabase sqLiteDatabase = dbHeper.getWritableDatabase();
+                        //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
+                        SQLiteDatabase sqLiteDatabase = dbHeper.getWritableDatabase();
 
-                    //класс ContentValues используется для добавления новых строк в таблицу.
-                    //каждый объект этого класса представляет собой одну строку таблицы и
-                    //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
-                    ContentValues contentValues = new ContentValues();
+                        //класс ContentValues используется для добавления новых строк в таблицу.
+                        //каждый объект этого класса представляет собой одну строку таблицы и
+                        //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
+                        ContentValues contentValues = new ContentValues();
 
-                    //добавляем пары ключ-значение.
+                        //добавляем пары ключ-значение.
 
-                    title = etCreateEventTitle.getText().toString();
+                        title = etCreateEventTitle.getText().toString();
 
-                    beginDay = mDay;
-                    beginMonth = mMonth;
-                    beginYear = mYear;
-                    beginHour = String.valueOf(getCurrentHour());
-                    beginMinute = String.valueOf(getCurrentMinute());
+                        beginDay = mDay;
+                        beginMonth = mMonth;
+                        beginYear = mYear;
+                        beginHour = String.valueOf(getCurrentHour());
+                        beginMinute = String.valueOf(getCurrentMinute());
 
 
-                    endDay = mDay;
-                    endMonth = mMonth;
-                    endHour = String.valueOf(getCurrentHour());
-                    endMinute = String.valueOf(getCurrentMinute());
+                        endDay = mDay;
+                        endMonth = mMonth;
+                        endHour = String.valueOf(getCurrentHour());
+                        endMinute = String.valueOf(getCurrentMinute());
 
-                    description = etEventDescription.getText().toString();
+                        description = etEventDescription.getText().toString();
 
-                    event = new EventDTO(title, description, beginDay, beginMonth, beginYear);
+                        event = new EventDTO(title, description, beginDay, beginMonth, beginYear);
 
-                    contentValues.put(TABLE_EVENTS_KEY_TITLE, title);
-                    contentValues.put(TABLE_EVENTS_KEY_LOCATION, location);
-                    contentValues.put(TABLE_EVENTS_KEY_BEGIN_DAY, beginDay);
-                    contentValues.put(TABLE_EVENTS_KEY_BEGIN_MONTH, beginMonth);
-                    contentValues.put(TABLE_EVENTS_KEY_BEGIN_YEAR, beginYear);
-                    contentValues.put(TABLE_EVENTS_KEY_BEGIN_HOUR, beginHour);
-                    contentValues.put(TABLE_EVENTS_KEY_BEGIN_MINUTE, beginMinute);
-                    contentValues.put(TABLE_EVENTS_KEY_END_DAY, endDay);
-                    contentValues.put(TABLE_EVENTS_KEY_END_MONTH, endMonth);
-                    contentValues.put(TABLE_EVENTS_KEY_END_HOUR, endHour);
-                    contentValues.put(TABLE_EVENTS_KEY_END_MINUTE, endMinute);
-                    contentValues.put(TABLE_EVENTS_KEY_DESCRIPTION, description);
-                    //id заполнится автоматически.
+                        contentValues.put(TABLE_EVENTS_KEY_TITLE, title);
+                        contentValues.put(TABLE_EVENTS_KEY_LOCATION, location);
+                        contentValues.put(TABLE_EVENTS_KEY_BEGIN_DAY, beginDay);
+                        contentValues.put(TABLE_EVENTS_KEY_BEGIN_MONTH, beginMonth);
+                        contentValues.put(TABLE_EVENTS_KEY_BEGIN_YEAR, beginYear);
+                        contentValues.put(TABLE_EVENTS_KEY_BEGIN_HOUR, beginHour);
+                        contentValues.put(TABLE_EVENTS_KEY_BEGIN_MINUTE, beginMinute);
+                        contentValues.put(TABLE_EVENTS_KEY_END_DAY, endDay);
+                        contentValues.put(TABLE_EVENTS_KEY_END_MONTH, endMonth);
+                        contentValues.put(TABLE_EVENTS_KEY_END_HOUR, endHour);
+                        contentValues.put(TABLE_EVENTS_KEY_END_MINUTE, endMinute);
+                        contentValues.put(TABLE_EVENTS_KEY_DESCRIPTION, description);
+                        //id заполнится автоматически.
 
-                    //вставляем подготовленные строки в таблицу.
-                    //второй аргумент используется для вставки пустой строки,
-                    //сейчас он нам не нужен, поэтому он = null.
-                    sqLiteDatabase.insert(TABLE_EVENTS_NAME, null, contentValues);
+                        //вставляем подготовленные строки в таблицу.
+                        //второй аргумент используется для вставки пустой строки,
+                        //сейчас он нам не нужен, поэтому он = null.
+                        sqLiteDatabase.insert(TABLE_EVENTS_NAME, null, contentValues);
 
-                    Log.d(LOG_TAG, "Date inserted");
+                        Log.d(LOG_TAG, "Date inserted");
 
-                    //закрываем соединение с БД.
-                    dbHeper.close();
+                        //закрываем соединение с БД.
+                        dbHeper.close();
 
 ////////////////////////
-                    isSavedFlagEvent = true;
-                    isCardForUpdate = false;
-                    CreateEventActivity.this.finish();
+                        isSavedFlagEvent = true;
+                        isCardForUpdate = false;
+                        CreateEventActivity.this.finish();
 
-                }
+                    }
 
-            });
+                });
 
-            //negative button.
-            builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    isCardForUpdate = false;
-                    CreateEventActivity.this.finish();
-                }
-            });
+                //negative button.
+                builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        isCardForUpdate = false;
+                        CreateEventActivity.this.finish();
+                    }
+                });
 
-            //negative button.
-            builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                //negative button.
+                builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
+                    }
+                });
 
-            builder.show();
+                builder.show();
+            } else {
+                isCardForUpdate = false;
+                CreateEventActivity.this.finish();
+                super.onBackPressed();
+            }
         } else {
-            isCardForUpdate = false;
             CreateEventActivity.this.finish();
-            super.onBackPressed();
         }
     }
 
+    public boolean hasChanges() {
+        boolean hasChanges = false;
+        if (!oldTitle.equals(etCreateEventTitle.getText().toString()) ||
+                !oldDate.equals(tvEventsDeadline.getText().toString()) ||
+                !oldDescription.equals(etEventDescription.getText().toString())
+                ) {
+            hasChanges = true;
+        }
+        return hasChanges;
+    }
 
     @Override
     public void onPause() {

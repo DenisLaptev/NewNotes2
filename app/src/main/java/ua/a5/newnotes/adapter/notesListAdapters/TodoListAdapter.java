@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -32,8 +30,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_TODO_KEY_MONTH;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_TODO_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_TODO_KEY_YEAR;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_TODO_NAME;
-import static ua.a5.newnotes.R.id.delete_item;
-import static ua.a5.newnotes.R.id.update_item;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_TODO;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
 
@@ -111,51 +107,37 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
         holder.ivPictureTodoMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //deleteItem(position, todoDTOList);
-                PopupMenu cardPopupMenu = new PopupMenu(context, holder.ivPictureTodoMenu);
-                cardPopupMenu.getMenuInflater().inflate(R.menu.menu_card, cardPopupMenu.getMenu());
+                isCardForUpdate = true;
+                Intent intent = new Intent(context, CreateNoteTODOActivity.class);
+                intent.putExtra(KEY_UPDATE_TODO, item);
+                context.startActivity(intent);
+            }
+        });
+        holder.ivPictureTodoMenuDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.deletedialog_title);
+                builder.setMessage(R.string.deletedialog_message);
 
-                cardPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                //positive button.
+                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem it) {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteItem(position, todoDTOList);
+                        notifyItemRemoved(position);
+                    }
 
-                        switch (it.getItemId()) {
-                            case delete_item:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-                                builder.setTitle(R.string.deletedialog_title);
-                                builder.setMessage(R.string.deletedialog_message);
+                });
 
-                                //positive button.
-                                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        deleteItem(position, todoDTOList);
-                                        notifyItemRemoved(position);
-                                    }
+                //negative button.
+                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                                });
-
-                                //negative button.
-                                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                });
-                                builder.show();
-                                break;
-
-                            case update_item:
-                                isCardForUpdate = true;
-                                Intent intent = new Intent(context, CreateNoteTODOActivity.class);
-                                intent.putExtra(KEY_UPDATE_TODO, item);
-                                context.startActivity(intent);
-                                break;
-                        }
-                        return true;
                     }
                 });
-                cardPopupMenu.show();
+                builder.show();
             }
         });
     }
@@ -222,6 +204,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
         TextView tvDate;
 
         ImageView ivPictureTodoMenu;
+        ImageView ivPictureTodoMenuDel;
 
         ItemClickListener itemClickListener;
 
@@ -233,6 +216,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
             chbxTodo = (CheckBox)itemView.findViewById(R.id.chbx_todo);
             tvDate = (TextView)itemView.findViewById(R.id.tv_date_todo);
             ivPictureTodoMenu = (ImageView) itemView.findViewById(R.id.todo_card_menu);
+            ivPictureTodoMenuDel = (ImageView) itemView.findViewById(R.id.todo_card_menu_delete);
 
 
             this.itemClickListener = itemClickListener;

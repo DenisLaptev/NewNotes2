@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,8 +24,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_DATE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_DESCRIPTION;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_NAME;
-import static ua.a5.newnotes.R.id.delete_item;
-import static ua.a5.newnotes.R.id.update_item;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_IDEAS;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
 
@@ -82,51 +78,37 @@ public class IdeasListAdapter extends RecyclerView.Adapter<IdeasListAdapter.Idea
         holder.ivPictureIdeaMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //deleteItem(position, ideasDTOList);
-                PopupMenu cardPopupMenu = new PopupMenu(context, holder.ivPictureIdeaMenu);
-                cardPopupMenu.getMenuInflater().inflate(R.menu.menu_card, cardPopupMenu.getMenu());
+                isCardForUpdate = true;
+                Intent intent = new Intent(context, CreateNoteIdeasActivity.class);
+                intent.putExtra(KEY_UPDATE_IDEAS, item);
+                context.startActivity(intent);
+            }
+        });
+        holder.ivPictureIdeaMenuDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.deletedialog_title);
+                builder.setMessage(R.string.deletedialog_message);
 
-                cardPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                //positive button.
+                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem it) {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteItem(position, ideasDTOList);
+                        notifyItemRemoved(position);
+                    }
 
-                        switch (it.getItemId()) {
-                            case delete_item:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-                                builder.setTitle(R.string.deletedialog_title);
-                                builder.setMessage(R.string.deletedialog_message);
+                });
 
-                                //positive button.
-                                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        deleteItem(position, ideasDTOList);
-                                        notifyItemRemoved(position);
-                                    }
+                //negative button.
+                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                                });
-
-                                //negative button.
-                                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                });
-                                builder.show();
-                                break;
-
-                            case update_item:
-                                isCardForUpdate = true;
-                                Intent intent = new Intent(context, CreateNoteIdeasActivity.class);
-                                intent.putExtra(KEY_UPDATE_IDEAS, item);
-                                context.startActivity(intent);
-                                break;
-                        }
-                        return true;
                     }
                 });
-                cardPopupMenu.show();
+                builder.show();
             }
         });
     }
@@ -175,6 +157,7 @@ public class IdeasListAdapter extends RecyclerView.Adapter<IdeasListAdapter.Idea
         TextView tvDescription;
         TextView tvDate;
         ImageView ivPictureIdeaMenu;
+        ImageView ivPictureIdeaMenuDelete;
 
         ItemClickListener itemClickListener;
 
@@ -186,6 +169,7 @@ public class IdeasListAdapter extends RecyclerView.Adapter<IdeasListAdapter.Idea
             tvDescription = (TextView) itemView.findViewById(R.id.tv_description_ideas);
             tvDate = (TextView) itemView.findViewById(R.id.tv_date_ideas);
             ivPictureIdeaMenu = (ImageView) itemView.findViewById(R.id.ideas_card_menu);
+            ivPictureIdeaMenuDelete = (ImageView) itemView.findViewById(R.id.ideas_card_menu_delete);
 
 
             this.itemClickListener = itemClickListener;

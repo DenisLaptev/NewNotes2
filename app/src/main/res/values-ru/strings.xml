@@ -7,8 +7,8 @@
     <string name="billing_pubkey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkm2CrMoOeLISKGMYbslJBdSuWd5v9fYA2jF0bFOCG2RgLuEHMSBHNsOowk6vHF1v+j0LqF4C7BpuxgvvHaQIpt2Ofwk1JP15lAJabTPcbSufzqGGxwKB9VrWwSPEZv9gOKPfN9oBrMLeh6PALRRsWnXELCY1OysAYZUofVWPze2GzvGoJ86EXbE/QvcrR8YGK9R3EvjqYezHVQbVD0w3DVgNoltgH2c4eKOoHX7pVs9xQChYpc+v7a08fjVYgVl9sknGZyU2r97jKZqu9ykuNVAAcCFhJadg7db5W8CPFMNxETc71dC+dCG6gwsSTjEIM42AXq7irru+OGT5ziuwiwIDAQAB</string>
 
 
-    <string name="app_name">Smart Notes</string>
-    <string name="toolbar_title">Умные заметки</string>
+    <string name="app_name">Умные теги</string>
+    <string name="toolbar_title">Умные теги</string>
 
     <string name="tab_item_different">Разное</string>
     <string name="tab_item_ideas">Идеи</string>
@@ -64,22 +64,33 @@
     <string name="fab_newdifferent">Разное</string>
 
     <string name="january">января</string>
+    <string name="february">февраля</string>
+    <string name="march">марта</string>
+    <string name="april">апреля</string>
+    <string name="may">мая</string>
+    <string name="june">июня</string>
+    <string name="july">июля</string>
+    <string name="august">августа</string>
+    <string name="september">сентября</string>
+    <string name="october">октября</string>
+    <string name="november">ноября</string>
+    <string name="december">декабря</string>
 
-    <string name="edititem_title">Заголовок</string>
-    <string name="edititem_hint_eventtitle">Заголовок события</string>
-    <string name="edititem_date">Дата</string>
-    <string name="edititem_hint_event_date">Дата события</string>
+    <string name="edititem_title">Заголовок </string>
+    <string name="edititem_hint_eventtitle">Заголовок</string>
+    <string name="edititem_date">Дата </string>
+    <string name="edititem_hint_event_date">Дата</string>
     <string name="edititem_hint_description_of_event">Описание события</string>
-    <string name="edititem_name">Имя</string>
+    <string name="edititem_name">Имя </string>
     <string name="edititem_hint_name">Имя</string>
     <string name="edititem_hint_birthdaydate">Дата</string>
-    <string name="edititem_hint_note_title">Заголовок заметки</string>
-    <string name="edititem_hint_type_your_note">Напишите Вашу заметку...</string>
-    <string name="edititem_hint_type_your_idea">Напишите Вашу идею...</string>
+    <string name="edititem_hint_note_title">Заголовок</string>
+    <string name="edititem_hint_type_your_note">Напишите Вашу заметку…</string>
+    <string name="edititem_hint_type_your_idea">Напишите Вашу идею…</string>
     <string name="edititem_hint_todo_date">Дата</string>
     <string name="edititem_hint_description">Описание</string>
 
-    <string name="itemmarker_event">СОБЫТИЕ</string>
+    <string name="itemmarker_event">События</string>
     <string name="itemmarker_birthdays">Дни рождения</string>
     <string name="itemmarker_different">Разное</string>
     <string name="itemmarker_ideas">Идеи</string>
@@ -97,5 +108,7 @@
 
     <string name="cardmenu_update">обновить</string>
     <string name="cardmenu_delete">удалить</string>
+    <string name="description">описание</string>
+    <string name="is_done">выполнено</string>
 
 </resources>

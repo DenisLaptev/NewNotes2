@@ -62,58 +62,71 @@ public class BirthdayDTO implements Serializable {
     }
 
 
+
     public String generateStringMonth(int month){
         String stringMonth = null;
         switch (month){
             case 0:
                 stringMonth = "января";
-                
+                //stringMonth = context.getResources().getString(R.string.january);
                 break;
 
             case 1:
                 stringMonth = "февраля";
+                //stringMonth = context.getResources().getString(R.string.february);
                 break;
 
             case 2:
                 stringMonth = "марта";
+                //stringMonth = context.getResources().getString(R.string.march);
                 break;
 
             case 3:
                 stringMonth = "апреля";
+                //stringMonth = context.getResources().getString(R.string.april);
                 break;
 
             case 4:
                 stringMonth = "мая";
+                //stringMonth = context.getResources().getString(R.string.may);
                 break;
 
             case 5:
                 stringMonth = "июня";
+                //stringMonth = context.getResources().getString(R.string.june);
                 break;
 
             case 6:
                 stringMonth = "июля";
+                //stringMonth = context.getResources().getString(R.string.july);
                 break;
 
             case 7:
                 stringMonth = "августа";
+                //stringMonth = context.getResources().getString(R.string.august);
                 break;
 
             case 8:
                 stringMonth = "сентября";
+                //stringMonth = context.getResources().getString(R.string.september);
                 break;
 
             case 9:
                 stringMonth = "октября";
+                //stringMonth = context.getResources().getString(R.string.october);
                 break;
 
             case 10:
                 stringMonth = "ноября";
+                //stringMonth = context.getResources().getString(R.string.november);
                 break;
 
             case 11:
                 stringMonth = "декабря";
+                //stringMonth = context.getResources().getString(R.string.december);
                 break;
         }
         return stringMonth;
     }
+
 }

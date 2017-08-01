@@ -111,7 +111,7 @@
                     fab:fab_title="DIFFERENT"
                     />
 <!---->
-
+<!--
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_notes_quit"
                     android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
                     fab:fab_colorPressed="@color/colorPrimaryDark"
                     fab:fab_icon="@drawable/ic_run"
                     fab:fab_title="Quit"
-                    />
+                    />-->
                 <!---->
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
         </FrameLayout>

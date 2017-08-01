@@ -48,7 +48,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_DATE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_DESCRIPTION;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_IDEAS_NAME;
-
 import static ua.a5.newnotes.activities.NotesActivity.mIsPremium;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_IDEAS;
 import static ua.a5.newnotes.utils.Constants.LOG_TAG;
@@ -89,6 +88,11 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
     String noteDescription;
     String noteDate;
 
+    //Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+    String oldTitle;
+    String oldDescription;
+
 
     //для баннера////////////////////////////////////////////////////
     protected AdView mAdView;
@@ -108,7 +112,7 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
 
         toolbarIdea = (Toolbar) findViewById(R.id.toolbar_idea);
         toolbarIdea.setTitle(R.string.toolbartitle_idea);
-        toolbarIdea.setTitleTextAppearance(this,R.style.toolbar_title_style);
+        toolbarIdea.setTitleTextAppearance(this, R.style.toolbar_title_style);
         toolbarIdea.setOverflowIcon(getResources().getDrawable(R.drawable.ic_dots_vertical));
         setSupportActionBar(toolbarIdea);
 
@@ -154,6 +158,13 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
         noteCategory = "ideas";
 
         etCreateNoteTitle = (EditText) findViewById(R.id.note_etCreateNoteIdeasTitle);
+        etNoteDescription = (EditText) findViewById(R.id.et_note_ideas_description);
+
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+        oldTitle = etCreateNoteTitle.getText().toString();
+        oldDescription = etNoteDescription.getText().toString();
+
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
         etCreateNoteTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -166,7 +177,6 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
         });
 
 
-        etNoteDescription = (EditText) findViewById(R.id.et_note_ideas_description);
         etNoteDescription.addTextChangedListener(onTextChangedListener());
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
@@ -184,6 +194,11 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             ideaDTO = (IdeaDTO) getIntent().getSerializableExtra(KEY_UPDATE_IDEAS);
             etCreateNoteTitle.setText(ideaDTO.getTitle());
             etNoteDescription.setText(ideaDTO.getDescription());
+
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+            oldTitle = etCreateNoteTitle.getText().toString();
+            oldDescription = etNoteDescription.getText().toString();
         } else {
             ideaDTO = new IdeaDTO(
                     new String(""),
@@ -253,6 +268,7 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
                 dbHelper.close();
 ////////////////////////
                 isSavedFlagIdea = true;
+                CreateNoteIdeasActivity.this.finish();
                 break;
 
             case R.id.menu_idea_delete:
@@ -688,90 +704,103 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (hasChanges()) {
 
-        if (!isSavedFlagIdea) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteIdeasActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle(R.string.savedialog_title);
-            builder.setMessage(R.string.savedialog_message);
+            if (!isSavedFlagIdea) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteIdeasActivity.this, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.savedialog_title);
+                builder.setMessage(R.string.savedialog_message);
 
-            //positive button.
-            builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (isCardForUpdate == true) {
-                        deleteItemFromTable(ideaDTO);
-                    }
-                    isCardForUpdate = false;
+                //positive button.
+                builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (isCardForUpdate == true) {
+                            deleteItemFromTable(ideaDTO);
+                        }
+                        isCardForUpdate = false;
 ////////////////
-                    //заполняем БД данными.
+                        //заполняем БД данными.
 
-                    //класс SQLiteDatabase предназначен для управления БД SQLite.
-                    //если БД не существует, dbHelper вызовет метод onCreate(),
-                    //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
+                        //класс SQLiteDatabase предназначен для управления БД SQLite.
+                        //если БД не существует, dbHelper вызовет метод onCreate(),
+                        //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
 
-                    //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
-                    SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+                        //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
+                        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 
-                    //класс ContentValues используется для добавления новых строк в таблицу.
-                    //каждый объект этого класса представляет собой одну строку таблицы и
-                    //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
-                    ContentValues contentValues = new ContentValues();
+                        //класс ContentValues используется для добавления новых строк в таблицу.
+                        //каждый объект этого класса представляет собой одну строку таблицы и
+                        //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
+                        ContentValues contentValues = new ContentValues();
 
-                    //добавляем пары ключ-значение.
+                        //добавляем пары ключ-значение.
 
 
-                    noteTitle = etCreateNoteTitle.getText().toString();
-                    noteDescription = etNoteDescription.getText().toString();
-                    noteDate = tvCreateNoteDate.getText().toString();
+                        noteTitle = etCreateNoteTitle.getText().toString();
+                        noteDescription = etNoteDescription.getText().toString();
+                        noteDate = tvCreateNoteDate.getText().toString();
 
-                    note = new IdeaDTO(noteTitle, noteDescription, noteDate);
+                        note = new IdeaDTO(noteTitle, noteDescription, noteDate);
 
-                    contentValues.put(TABLE_NOTES_IDEAS_KEY_TITLE, noteTitle);
-                    contentValues.put(TABLE_NOTES_IDEAS_KEY_DATE, noteDate);
-                    contentValues.put(TABLE_NOTES_IDEAS_KEY_DESCRIPTION, noteDescription);
-                    //id заполнится автоматически.
+                        contentValues.put(TABLE_NOTES_IDEAS_KEY_TITLE, noteTitle);
+                        contentValues.put(TABLE_NOTES_IDEAS_KEY_DATE, noteDate);
+                        contentValues.put(TABLE_NOTES_IDEAS_KEY_DESCRIPTION, noteDescription);
+                        //id заполнится автоматически.
 
-                    //вставляем подготовленные строки в таблицу.
-                    //второй аргумент используется для вставки пустой строки,
-                    //сейчас он нам не нужен, поэтому он = null.
-                    sqLiteDatabase.insert(DBHelper.TABLE_NOTES_IDEAS_NAME, null, contentValues);
-                    Log.d(LOG_TAG, "Date inserted");
-                    //закрываем соединение с БД.
-                    dbHelper.close();
+                        //вставляем подготовленные строки в таблицу.
+                        //второй аргумент используется для вставки пустой строки,
+                        //сейчас он нам не нужен, поэтому он = null.
+                        sqLiteDatabase.insert(DBHelper.TABLE_NOTES_IDEAS_NAME, null, contentValues);
+                        Log.d(LOG_TAG, "Date inserted");
+                        //закрываем соединение с БД.
+                        dbHelper.close();
 ////////////////////////
-                    isSavedFlagIdea = true;
-                    isCardForUpdate = false;
-                    CreateNoteIdeasActivity.this.finish();
-                }
+                        isSavedFlagIdea = true;
+                        isCardForUpdate = false;
+                        CreateNoteIdeasActivity.this.finish();
+                    }
 
-            });
+                });
 
-            //negative button.
-            builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                //negative button.
+                builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                    isCardForUpdate = false;
-                    CreateNoteIdeasActivity.this.finish();
-                }
-            });
+                        isCardForUpdate = false;
+                        CreateNoteIdeasActivity.this.finish();
+                    }
+                });
 
-            //negative button.
-            builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                //negative button.
+                builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
+                    }
+                });
 
-            builder.show();
+                builder.show();
+            } else {
+                isCardForUpdate = false;
+                CreateNoteIdeasActivity.this.finish();
+                super.onBackPressed();
+            }
         } else {
-            isCardForUpdate = false;
             CreateNoteIdeasActivity.this.finish();
-            super.onBackPressed();
         }
     }
 
+    public boolean hasChanges() {
+        boolean hasChanges = false;
+        if (!oldTitle.equals(etCreateNoteTitle.getText().toString()) ||
+                !oldDescription.equals(etNoteDescription.getText().toString())
+                ) {
+            hasChanges = true;
+        }
+        return hasChanges;
+    }
 
     @Override
     public void onPause() {

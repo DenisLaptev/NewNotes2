@@ -31,6 +31,11 @@ public class UtilsWords {
     public static Map<String, Integer> generateTimeWords() {
         Map<String, Integer> timeWords = new HashMap<>();
 
+        timeWords.put("давеча", getCurrentDay() - 100*365);
+        timeWords.put("Давеча", getCurrentDay() - 100*365);
+        timeWords.put("ДАВЕЧА", getCurrentDay() - 100*365);
+
+
         timeWords.put("позавчера", getCurrentDay() - 2);
         timeWords.put("Позавчера", getCurrentDay() - 2);
         timeWords.put("ПОЗАВЧЕРА", getCurrentDay() - 2);
@@ -54,6 +59,10 @@ public class UtilsWords {
         timeWords.put("сегодня", getCurrentDay());
         timeWords.put("Сегодня", getCurrentDay());
         timeWords.put("СЕГОДНЯ", getCurrentDay());
+
+        timeWords.put("намедни", getCurrentDay());
+        timeWords.put("Намедни", getCurrentDay());
+        timeWords.put("НАМЕДНИ", getCurrentDay());
 
         timeWords.put("today", getCurrentDay());
         timeWords.put("Today", getCurrentDay());

@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,8 +24,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_KEY_DATE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_KEY_DESCRIPTION;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_NAME;
-import static ua.a5.newnotes.R.id.delete_item;
-import static ua.a5.newnotes.R.id.update_item;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_DIFFERENT;
 import static ua.a5.newnotes.utils.Constants.isCardForUpdate;
 
@@ -83,53 +79,39 @@ public class DifferentListAdapter extends RecyclerView.Adapter<DifferentListAdap
         holder.ivPictureDifferentMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //deleteItem(position, differentDTOList);
+                isCardForUpdate = true;
+                Intent intent = new Intent(context, CreateNoteDifferentActivity.class);
+                intent.putExtra(KEY_UPDATE_DIFFERENT, item);
+                context.startActivity(intent);
+            }
+        });
 
-                PopupMenu cardPopupMenu = new PopupMenu(context, holder.ivPictureDifferentMenu);
-                cardPopupMenu.getMenuInflater().inflate(R.menu.menu_card, cardPopupMenu.getMenu());
+        holder.ivPictureDifferentMenuDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.deletedialog_title);
+                builder.setMessage(R.string.deletedialog_message);
 
-                cardPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                //positive button.
+                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem it) {
+                    public void onClick(DialogInterface dialog, int which) {
 
-                        switch (it.getItemId()) {
-                            case delete_item:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-                                builder.setTitle(R.string.deletedialog_title);
-                                builder.setMessage(R.string.deletedialog_message);
+                        deleteItem(position, differentDTOList);
+                        notifyItemRemoved(position);
+                    }
 
-                                //positive button.
-                                builder.setPositiveButton(R.string.deletedialog_positivebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                });
 
-                                        deleteItem(position, differentDTOList);
-                                        notifyItemRemoved(position);
-                                    }
+                //negative button.
+                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                                });
-
-                                //negative button.
-                                builder.setNegativeButton(R.string.deletedialog_negativebutton, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                });
-                                builder.show();
-                                break;
-
-                            case update_item:
-                                isCardForUpdate = true;
-                                Intent intent = new Intent(context, CreateNoteDifferentActivity.class);
-                                intent.putExtra(KEY_UPDATE_DIFFERENT, item);
-                                context.startActivity(intent);
-                                break;
-                        }
-                        return true;
                     }
                 });
-                cardPopupMenu.show();
+                builder.show();
             }
         });
     }
@@ -178,6 +160,7 @@ public class DifferentListAdapter extends RecyclerView.Adapter<DifferentListAdap
         TextView tvDescription;
         TextView tvDate;
         ImageView ivPictureDifferentMenu;
+        ImageView ivPictureDifferentMenuDelete;
 
         ItemClickListener itemClickListener;
 
@@ -189,6 +172,7 @@ public class DifferentListAdapter extends RecyclerView.Adapter<DifferentListAdap
             tvDescription = (TextView) itemView.findViewById(R.id.tv_description_different);
             tvDate = (TextView) itemView.findViewById(R.id.tv_date_different);
             ivPictureDifferentMenu = (ImageView) itemView.findViewById(R.id.different_card_menu);
+            ivPictureDifferentMenuDelete = (ImageView) itemView.findViewById(R.id.different_card_menu_delete);
 
             this.itemClickListener = itemClickListener;
 

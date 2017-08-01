@@ -121,6 +121,7 @@ public class TodayFragment extends AbstractTabFragment implements TodayEventsLis
             }
         });
 
+/*
 
         FloatingActionButton actionMainmenu = (FloatingActionButton) getActivity().findViewById(R.id.action_events_quit);
         actionMainmenu.setTitle(getString(R.string.fab_quit));
@@ -130,6 +131,7 @@ public class TodayFragment extends AbstractTabFragment implements TodayEventsLis
                 getActivity().onBackPressed();
             }
         });
+*/
 
         final FrameLayout frameLayout = (FrameLayout) getActivity().findViewById(R.id.frame_layout_events);
         frameLayout.getBackground().setAlpha(0);

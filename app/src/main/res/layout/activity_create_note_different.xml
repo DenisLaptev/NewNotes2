@@ -62,7 +62,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:text="Date"
-                            android:textSize="22sp"/>
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/note_tvCreateNoteDifferentTime"
@@ -72,7 +72,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:text="Time"
-                            android:textSize="22sp"/>
+                            android:textSize="16sp"/>
                     </RelativeLayout>
 
                     <TextView
@@ -84,21 +84,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
+<!--
                         <TextView
-                            style="@style/ItemTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/edititem_title"
                             android:textSize="25sp"/>
 
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
+                            android:textSize="25sp"/>
+-->
 
                         <EditText
+                            style="@style/ItemTextStyle"
                             android:id="@+id/et_diff_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/edititem_hint_note_title"
-                            android:textSize="25sp"
+                            android:textSize="16sp"
                             android:background="@android:color/transparent"/>
 
                     </LinearLayout>
@@ -117,7 +124,7 @@
                         android:hint="@string/edititem_hint_type_your_note"
                         android:inputType="textNoSuggestions|textMultiLine"
                         android:linksClickable="true"
-                        android:textSize="25sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 

@@ -23,29 +23,41 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:text="@string/itemmarker_birthdays"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/color_marker_birthdays" />
+            android:textColor="@color/color_marker_birthdays"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-
-        <ImageView
-            android:id="@+id/birthdays_card_menu"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:layout_margin="8dp"
-            android:src="@drawable/ic_lead_pencil" />
+            android:orientation="horizontal">
 
-<!--
+            <ImageView
+                android:id="@+id/birthdays_card_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_lead_pencil" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|right"
-            android:layout_margin="12dp"
-            android:src="@drawable/ic_cake_variant" />
+            <ImageView
+                android:id="@+id/birthdays_card_menu_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_delete_forever" />
+        </LinearLayout>
 
--->
+        <!--
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:layout_margin="12dp"
+                    android:src="@drawable/ic_cake_variant" />
+
+        -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,18 +69,18 @@
                 android:id="@+id/title_birthdays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="3"
                 android:paddingBottom="5dp"
                 android:text="Title"
                 android:textColor="@color/color_marker_birthdays"
-                android:textSize="8pt"
-                android:maxLines="3"/>
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/tv_date_birthdays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="21.04.2017"
-                android:maxLines="3"/>
+                android:maxLines="3"
+                android:text="21.04.2017" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

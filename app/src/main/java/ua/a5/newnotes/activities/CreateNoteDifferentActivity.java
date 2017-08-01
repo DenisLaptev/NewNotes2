@@ -48,7 +48,6 @@ import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_KEY_DATE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_KEY_DESCRIPTION;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_KEY_TITLE;
 import static ua.a5.newnotes.DAO.DBHelper.TABLE_NOTES_DIFFERENT_NAME;
-
 import static ua.a5.newnotes.activities.NotesActivity.mIsPremium;
 import static ua.a5.newnotes.utils.Constants.KEY_UPDATE_DIFFERENT;
 import static ua.a5.newnotes.utils.Constants.LOG_TAG;
@@ -89,6 +88,11 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
     String noteDescription;
     String noteDate;
 
+    //Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+    String oldTitle;
+    String oldDescription;
+
     //для баннера////////////////////////////////////////////////////
     protected AdView mAdView;
     //для баннера////////////////////////////////////////////////////
@@ -106,7 +110,7 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
 
         toolbarDifferent = (Toolbar) findViewById(R.id.toolbar_different);
         toolbarDifferent.setTitle(R.string.toolbartitle_different);
-        toolbarDifferent.setTitleTextAppearance(this,R.style.toolbar_title_style);
+        toolbarDifferent.setTitleTextAppearance(this, R.style.toolbar_title_style);
         toolbarDifferent.setOverflowIcon(getResources().getDrawable(R.drawable.ic_dots_vertical));
         setSupportActionBar(toolbarDifferent);
 
@@ -148,7 +152,16 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         setDateAndTime();
 
+
         etCreateNoteTitle = (EditText) findViewById(R.id.et_diff_title);
+        etNoteDescription = (EditText) findViewById(R.id.et_diff_description);
+
+
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+        oldTitle = etCreateNoteTitle.getText().toString();
+        oldDescription = etNoteDescription.getText().toString();
+
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
         etCreateNoteTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -161,7 +174,6 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
         });
 
 
-        etNoteDescription = (EditText) findViewById(R.id.et_diff_description);
         etNoteDescription.addTextChangedListener(onTextChangedListener());
         //этот слушатель позволяет убирать клавиатуру EditText
         //при нажатии на пустое пространство.
@@ -179,7 +191,12 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
             differentDTO = (DifferentDTO) getIntent().getSerializableExtra(KEY_UPDATE_DIFFERENT);
             etCreateNoteTitle.setText(differentDTO.getTitle());
             etNoteDescription.setText(differentDTO.getDescription());
-        }else {
+
+//Записываем исходные значения полей. Если они не изменились, то когда нажимаем НАЗАД,
+//не появляется диалог СОХРАНИТЬ ИЗМЕНЕНИЯ?
+            oldTitle = etCreateNoteTitle.getText().toString();
+            oldDescription = etNoteDescription.getText().toString();
+        } else {
             differentDTO = new DifferentDTO(
                     new String(""),
                     new String(""),
@@ -232,10 +249,8 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                 noteDate = tvCreateNoteDate.getText().toString();
 
 
-
                 note = new DifferentDTO(noteTitle, noteDescription, noteDate);
                 System.out.println(note);
-
 
 
                 contentValues.put(TABLE_NOTES_DIFFERENT_KEY_TITLE, noteTitle);
@@ -252,6 +267,7 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
                 dbHelper.close();
 ////////////////////////
                 isSavedFlagDifferent = true;
+                CreateNoteDifferentActivity.this.finish();
                 break;
 
             case R.id.menu_different_delete:
@@ -681,95 +697,107 @@ public class CreateNoteDifferentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (hasChanges()) {
+            if (!isSavedFlagDifferent) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteDifferentActivity.this, R.style.MyAlertDialogStyle);
+                builder.setTitle(R.string.savedialog_title);
+                builder.setMessage(R.string.savedialog_message);
 
-        if (!isSavedFlagDifferent) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteDifferentActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle(R.string.savedialog_title);
-            builder.setMessage(R.string.savedialog_message);
+                //positive button.
+                builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-            //positive button.
-            builder.setPositiveButton(R.string.savedialog_positivebutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    if (isCardForUpdate == true) {
-                        deleteItemFromTable(differentDTO);
-                    }
-                    isCardForUpdate = false;
+                        if (isCardForUpdate == true) {
+                            deleteItemFromTable(differentDTO);
+                        }
+                        isCardForUpdate = false;
 
 ////////////////
-                    //заполняем БД данными.
+                        //заполняем БД данными.
 
-                    //класс SQLiteDatabase предназначен для управления БД SQLite.
-                    //если БД не существует, dbHelper вызовет метод onCreate(),
-                    //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
+                        //класс SQLiteDatabase предназначен для управления БД SQLite.
+                        //если БД не существует, dbHelper вызовет метод onCreate(),
+                        //если версия БД изменилась, dbHelper вызовет метод onUpgrade().
 
-                    //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
-                    SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+                        //в любом случае вернётся существующая, толькочто созданная или обновлённая БД.
+                        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 
-                    //класс ContentValues используется для добавления новых строк в таблицу.
-                    //каждый объект этого класса представляет собой одну строку таблицы и
-                    //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
-                    ContentValues contentValues = new ContentValues();
+                        //класс ContentValues используется для добавления новых строк в таблицу.
+                        //каждый объект этого класса представляет собой одну строку таблицы и
+                        //выглядит, как массив с именами столбцов и значениями, которые им соответствуют.
+                        ContentValues contentValues = new ContentValues();
 
-                    //добавляем пары ключ-значение.
+                        //добавляем пары ключ-значение.
 
-                    noteCategory = "different";
-                    noteTitle = etCreateNoteTitle.getText().toString();
-                    noteDescription = etNoteDescription.getText().toString();
-                    noteDate = tvCreateNoteDate.getText().toString();
-
-
-                    note = new DifferentDTO(noteTitle, noteDescription, noteDate);
-                    System.out.println(note);
+                        noteCategory = "different";
+                        noteTitle = etCreateNoteTitle.getText().toString();
+                        noteDescription = etNoteDescription.getText().toString();
+                        noteDate = tvCreateNoteDate.getText().toString();
 
 
-                    contentValues.put(TABLE_NOTES_DIFFERENT_KEY_TITLE, noteTitle);
-                    contentValues.put(TABLE_NOTES_DIFFERENT_KEY_DATE, noteDate);
-                    contentValues.put(TABLE_NOTES_DIFFERENT_KEY_DESCRIPTION, noteDescription);
-                    //id заполнится автоматически.
+                        note = new DifferentDTO(noteTitle, noteDescription, noteDate);
+                        System.out.println(note);
 
-                    //вставляем подготовленные строки в таблицу.
-                    //второй аргумент используется для вставки пустой строки,
-                    //сейчас он нам не нужен, поэтому он = null.
-                    sqLiteDatabase.insert(DBHelper.TABLE_NOTES_DIFFERENT_NAME, null, contentValues);
-                    Log.d(LOG_TAG, "Date inserted");
-                    //закрываем соединение с БД.
-                    dbHelper.close();
+
+                        contentValues.put(TABLE_NOTES_DIFFERENT_KEY_TITLE, noteTitle);
+                        contentValues.put(TABLE_NOTES_DIFFERENT_KEY_DATE, noteDate);
+                        contentValues.put(TABLE_NOTES_DIFFERENT_KEY_DESCRIPTION, noteDescription);
+                        //id заполнится автоматически.
+
+                        //вставляем подготовленные строки в таблицу.
+                        //второй аргумент используется для вставки пустой строки,
+                        //сейчас он нам не нужен, поэтому он = null.
+                        sqLiteDatabase.insert(DBHelper.TABLE_NOTES_DIFFERENT_NAME, null, contentValues);
+                        Log.d(LOG_TAG, "Date inserted");
+                        //закрываем соединение с БД.
+                        dbHelper.close();
 ////////////////////////
-                    isSavedFlagDifferent = true;
-                    isCardForUpdate = false;
-                    CreateNoteDifferentActivity.this.finish();
-                }
+                        isSavedFlagDifferent = true;
+                        isCardForUpdate = false;
+                        CreateNoteDifferentActivity.this.finish();
+                    }
 
-            });
+                });
 
-            //negative button.
-            builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                //negative button.
+                builder.setNegativeButton(R.string.savedialog_negativebutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                    isCardForUpdate = false;
-                    CreateNoteDifferentActivity.this.finish();
-                }
-            });
+                        isCardForUpdate = false;
+                        CreateNoteDifferentActivity.this.finish();
+                    }
+                });
 
-            //negative button.
-            builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                //negative button.
+                builder.setNeutralButton(R.string.savedialog_neutralbutton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
+                    }
+                });
 
-            builder.show();
+                builder.show();
+            } else {
+                isCardForUpdate = false;
+                CreateNoteDifferentActivity.this.finish();
+                super.onBackPressed();
+            }
         } else {
-            isCardForUpdate = false;
             CreateNoteDifferentActivity.this.finish();
-            super.onBackPressed();
         }
     }
 
+    public boolean hasChanges() {
+        boolean hasChanges = false;
+        if (!oldTitle.equals(etCreateNoteTitle.getText().toString()) ||
+                !oldDescription.equals(etNoteDescription.getText().toString())
+                ) {
+            hasChanges = true;
+        }
+        return hasChanges;
+    }
 
     @Override
     public void onPause() {

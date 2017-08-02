@@ -78,7 +78,7 @@
 
     <string name="edititem_title">Title </string>
     <string name="edititem_hint_eventtitle">Event Title</string>
-    <string name="edititem_date">Date </string>
+    <string name="edititem_date">Date</string>
     <string name="edititem_hint_event_date">Event Date</string>
     <string name="edititem_hint_description_of_event">Description of Event</string>
     <string name="edititem_name">Name </string>

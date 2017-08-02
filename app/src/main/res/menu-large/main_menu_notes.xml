@@ -6,9 +6,9 @@
     <item
         android:id="@+id/main_menu_notes_notes"
         android:icon="@drawable/ic_check_circle_outline_black"
-
         android:orderInCategory="1"
         android:title="@string/mainmenuitem_notes"
+
         />
 <!--android:icon="@drawable/ic_check_circle_outline_black"-->
     <item

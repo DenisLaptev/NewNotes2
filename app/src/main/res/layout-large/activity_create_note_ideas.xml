@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
 
                     <RelativeLayout
@@ -86,12 +86,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/ItemTextStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/edititem_title"
-                            android:textSize="25sp"/>
 
                         <LinearLayout
                             android:layout_width="0px"
@@ -100,6 +94,7 @@
                             android:focusableInTouchMode="true" />
 
                         <EditText
+                            style="@style/ItemTextStyle"
                             android:id="@+id/note_etCreateNoteIdeasTitle"
                             android:background="@android:color/transparent"
                             android:layout_width="wrap_content"

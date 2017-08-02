@@ -127,7 +127,7 @@ public class CreateNoteIdeasActivity extends AppCompatActivity {
             AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                     // Check the LogCat to get your test device ID
-                    .addTestDevice(getString(R.string.ads_testdevice_number))
+                    //.addTestDevice(getString(R.string.ads_testdevice_number))
                     .build();
             mAdView.loadAd(adRequest);
             //для баннера////////////////////////////////////////////////////

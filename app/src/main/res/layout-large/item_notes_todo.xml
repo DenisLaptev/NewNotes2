@@ -22,18 +22,30 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:text="@string/itemmarker_todo"
-            android:textSize="38sp"
-            android:textStyle="bold"
-            android:textColor="@color/color_marker_todo" />
+            android:textColor="@color/color_marker_todo"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-
-        <ImageView
-            android:id="@+id/todo_card_menu"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:layout_margin="8dp"
-            android:src="@drawable/ic_lead_pencil_tablet" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/todo_card_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_lead_pencil_tablet" />
+
+            <ImageView
+                android:id="@+id/todo_card_menu_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_delete_forever" />
+        </LinearLayout>
 
         <!--
                 <ImageView
@@ -44,41 +56,41 @@
                     android:src="@drawable/ic_check_circle_outline" />
 
         -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-                    <TextView
-                        android:id="@+id/title_todo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="5dp"
-                        android:text="Title"
-                        android:textSize="40sp"
-                        android:maxLines="3"
-                        android:textColor="@color/color_marker_todo"/>
+            <TextView
+                android:id="@+id/title_todo"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingBottom="5dp"
+                android:text="Title"
+                android:textColor="@color/color_marker_todo"
+                android:textSize="28sp" />
 
-                    <CheckBox
-                        android:id="@+id/chbx_todo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="todo1"
-                        android:button="@drawable/abc_btn_check_material"
-                        android:buttonTint="@color/colorAccent"
-                        android:textSize="24sp"
-                        />
+            <CheckBox
+                android:id="@+id/chbx_todo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/abc_btn_check_material"
+                android:buttonTint="@color/colorAccent"
+                android:text="todo1"
+                android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/tv_date_todo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="21.04.2017"
-                        android:maxLines="3"
-                        android:textSize="22sp"/>
+            <TextView
+                android:id="@+id/tv_date_todo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="21.04.2017"
+                android:textSize="22sp" />
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

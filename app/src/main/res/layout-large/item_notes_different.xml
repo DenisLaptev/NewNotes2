@@ -23,18 +23,31 @@
             android:layout_margin="16dp"
             android:text="@string/itemmarker_different"
             android:textColor="@color/color_marker_different"
-            android:textSize="38sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
-
-        <ImageView
-            android:id="@+id/different_card_menu"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:layout_margin="8dp"
-            android:src="@drawable/ic_lead_pencil_tablet" />
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/different_card_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="top|right"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_lead_pencil_tablet" />
+
+            <ImageView
+                android:id="@+id/different_card_menu_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="top|right"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_delete_forever" />
+        </LinearLayout>
         <!--
                 <ImageView
                     android:layout_width="wrap_content"
@@ -48,17 +61,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/title_different"
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:maxLines="3"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:paddingBottom="5dp"
                 android:text="Title"
                 android:textColor="@color/color_marker_different"
-                android:textSize="40sp" />
+                android:textSize="28sp" />
 
             <TextView
                 android:id="@+id/tv_description_different"
@@ -66,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:text="description"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_date_different"
@@ -74,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:text="21.04.2017"
-                android:textSize="22sp"/>
+                android:textSize="22sp" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

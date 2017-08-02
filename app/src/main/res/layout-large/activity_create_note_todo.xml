@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
                     <LinearLayout
                         android:id="@+id/todo_title_linear_layout"
@@ -53,12 +53,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/ItemTextStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/edititem_title"
-                            android:textSize="25sp"/>
+
 
                         <LinearLayout
                             android:layout_width="0px"
@@ -67,6 +62,7 @@
                             android:focusableInTouchMode="true" />
 
                         <EditText
+                            style="@style/ItemTextStyle"
                             android:id="@+id/note_etCreateNoteTODOTitle"
                             android:background="@android:color/transparent"
                             android:layout_width="wrap_content"
@@ -92,10 +88,24 @@
                             android:textSize="25sp"/>
 
                         <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
+                            android:textSize="25sp" />
+
+                        <TextView
                             android:id="@+id/tv_todo_deadline_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/edititem_hint_todo_date"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            style="@style/ItemTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  "
                             android:textSize="25sp"/>
 
                         <ImageView

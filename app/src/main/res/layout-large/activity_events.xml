@@ -82,16 +82,7 @@
                     fab:fab_icon="@drawable/ic_pillar_white"
                     fab:fab_size="normal"
                     fab:fab_title="EVENT"/>
-<!---->
-                <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/action_events_quit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/colorPrimaryDark"
-                    fab:fab_colorPressed="@color/colorPrimaryDark"
-                    fab:fab_icon="@drawable/ic_run"
-                    fab:fab_title="Quit"/>
-<!---->
+
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
         </FrameLayout>
